@@ -4,6 +4,8 @@ import ErrorPage from "../Shared/ErrorPage";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import CreateSurvey from "../Pages/CreateSurvey/CreateSurvey";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/create-survey",
+        element: (
+          <PrivateRoute>
+            <CreateSurvey></CreateSurvey>
+          </PrivateRoute>
+        ),
       },
     ],
   },

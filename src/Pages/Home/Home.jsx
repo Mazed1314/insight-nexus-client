@@ -4,13 +4,12 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section  */}
-      <div className="my-20">
+      <div>
         <Hero></Hero>
       </div>
 
       {/* Featured Surveys Section   */}
       <div className=""></div>
-
       {/* Latest Surveys Section  */}
       <div className=""></div>
 

@@ -23,8 +23,10 @@ const Login = () => {
         if (userCredential.user) {
           Swal.fire({
             title: "Successfully Google Login!",
+            position: "top-end",
             icon: "success",
-            confirmButtonText: "Cool",
+            showConfirmButton: false,
+            timer: 1500,
           });
           navigate(from, { replace: true });
         }
@@ -43,8 +45,10 @@ const Login = () => {
         if (userCredential.user) {
           Swal.fire({
             title: "Successfully Github Login!",
+            position: "top-end",
             icon: "success",
-            confirmButtonText: "Cool",
+            showConfirmButton: false,
+            timer: 1500,
           });
           navigate(from, { replace: true });
         }
@@ -65,8 +69,10 @@ const Login = () => {
         if (userCredential.user) {
           Swal.fire({
             title: "Successfully Login!",
+            position: "top-end",
             icon: "success",
-            confirmButtonText: "Cool",
+            showConfirmButton: false,
+            timer: 1500,
           });
           navigate(from, { replace: true });
         }

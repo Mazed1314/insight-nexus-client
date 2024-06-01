@@ -1,5 +1,5 @@
 const Hero = () => {
-  const hero_img = "../../../public/images/hero-top-2x-take-a-tour-rebrand.png";
+  const hero_img = "/images/hero-top-2x-take-a-tour-rebrand.png";
   return (
     <div className="hero min-h-screen bg-emerald-50">
       <div className="lg:hero-content flex-col lg:flex-row-reverse">
@@ -17,10 +17,17 @@ const Hero = () => {
               answers you need with surveys and forms.
             </p>
             <span className="flex gap-4">
-              <a className="btn rounded-sm text-white bg-yellow-500">
+              <a
+                href="register"
+                className="btn rounded-sm text-white bg-yellow-500"
+              >
                 Sign up free
               </a>
-              <a className="btn rounded-sm bg-white border-black">
+
+              <a
+                href="create-survey"
+                className="btn rounded-sm bg-white border-black"
+              >
                 Create your survey
               </a>
             </span>

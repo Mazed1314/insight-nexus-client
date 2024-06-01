@@ -52,14 +52,14 @@ const Navbar = () => {
       >
         <span className="flex">
           <LiaGem />
-          <span className="font-semibold">Get Premium</span>
+          <span className="font-semibold">Pricing</span>
         </span>
       </Link>
     </>
   );
 
   return (
-    <div className="navbar z-10 bg-white bg-opacity-80 fixed top-0 left-0">
+    <div className="navbar z-10 bg-white bg-opacity-95 fixed top-0 left-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
