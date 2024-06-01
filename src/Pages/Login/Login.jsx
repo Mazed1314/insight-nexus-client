@@ -153,13 +153,13 @@ const Login = () => {
               // onClick={handleGoogle}
               className="px-2 border rounded-full btn btn-sm"
             >
-              <FaFacebook className="text-xl text-sky-600" />
+              <FaFacebook className="text-xl text-blue-500" />
             </a>
             <a
               onClick={handleGithub}
               className="px-2 border rounded-full btn btn-sm text-xl"
             >
-              <FaGithub />
+              <FaGithub className="text-black" />
             </a>
           </p>
         </div>

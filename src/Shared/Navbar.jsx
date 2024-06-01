@@ -1,6 +1,25 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { LiaGem } from "react-icons/lia";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Successfully log out!",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+        console.log("user log out");
+      })
+
+      .catch((error) => console.error(error));
+  };
+
   const link = (
     <>
       <NavLink
@@ -23,7 +42,7 @@ const Navbar = () => {
       >
         Surveys
       </NavLink>
-      <NavLink
+      <Link
         className={({ isActive }) =>
           isActive
             ? "md:border-b-4 pb-2 border-yellow-500 text-yellow-500 font-bold"
@@ -31,46 +50,95 @@ const Navbar = () => {
         }
         to="/pro"
       >
-        Get Premium
-      </NavLink>
+        <span className="flex">
+          <LiaGem />
+          <span className="font-semibold">Get Premium</span>
+        </span>
+      </Link>
     </>
   );
 
   return (
-    <div>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+    <div className="navbar z-10 bg-white bg-opacity-80 fixed top-0 left-0">
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              {link}
-            </ul>
-          </div>{" "}
-          <a href="/" className="btn btn-ghost text-xl">
-            InsightNexus
-          </a>
-        </div>
-        <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal px-2 space-x-3">{link}</ul>
-        </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {link}
+          </ul>
+        </div>{" "}
+        <a href="/" className="btn btn-ghost text-xl">
+          InsightNexus
+        </a>
+      </div>
+      <div className="navbar-end hidden lg:flex">
+        <ul className="menu menu-horizontal px-2 space-x-5">{link}</ul>
+
+        {user ? (
+          <>
+            <div className="dropdown dropdown-end z-10">
+              <div
+                className="hover:tooltip tooltip-open hover:tooltip-bottom z-10"
+                data-tip={user.displayName}
+              >
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 border shadow rounded-full">
+                    <img alt="user" src={user.photoURL} />
+                  </div>
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="space-y-1 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <NavLink to="/profile" className={"hover:font-bold"}>
+                  Profile
+                </NavLink>
+                <NavLink to="dashboard" className={"hover:font-bold"}>
+                  Dashboard
+                </NavLink>
+                <NavLink
+                  onClick={handleLogOut}
+                  to="/"
+                  className={"hover:font-bold"}
+                >
+                  Logout
+                </NavLink>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="font-medium hover:text-gray-500 mr-3">
+              <u>Login</u>
+            </Link>
+            <Link to="/register" className="font-medium hover:text-gray-500 ">
+              <u>Register</u>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
