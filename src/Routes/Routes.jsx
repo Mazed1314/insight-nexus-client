@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import Surveys from "../Pages/Surveys/Surveys";
 import DashboardLayout from "../Layout/DashboardLayout";
 import ErrorPage from "../Component/Shared/ErrorPage";
+// import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,71 @@ const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
-    children: [],
+    children: [
+      // {
+      //   index: true,
+      //   element: (
+      //     <PrivateRoute>
+      //       <Statistics />
+      //     </PrivateRoute>
+      //   ),
+      // },
+
+      // ---------------------------------------------------------------
+      //  User Dashboard:
+      // --------------------------------------------------------------
+      {
+        path: "/user/surveys",
+        element: <PrivateRoute>{/* Participate in surveys */}</PrivateRoute>,
+      },
+      {
+        path: "/user/my-reports",
+        element: <PrivateRoute>{/* Reported surveys */}</PrivateRoute>,
+      },
+      // (only pro-user can access this page)
+      {
+        path: "/user/comments",
+        element: <PrivateRoute>{/* Reported surveys */}</PrivateRoute>,
+      },
+      // ---------------------------------------------------------------
+      //  Surveyor Dashboard:
+      // --------------------------------------------------------------
+      {
+        path: "/surveyor/create",
+        element: (
+          <PrivateRoute>{/* Survey creation with questions. */}</PrivateRoute>
+        ),
+      },
+      {
+        path: "/surveyor/update/:id",
+        element: <PrivateRoute>{/* Survey update */}</PrivateRoute>,
+      },
+      // ---------------------------------------------------------------
+      //  Admin Dashboard:
+      // --------------------------------------------------------------
+
+      {
+        path: "/admin/users",
+        element: <PrivateRoute>{/* Manage users and roles */}</PrivateRoute>,
+      },
+      {
+        path: "/admin/surveys",
+        element: (
+          <PrivateRoute>
+            {/* Publish/unpublish surveys.  */}
+            {/* Filter users by role. */}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin/payments",
+        element: (
+          <PrivateRoute>
+            {/* View all payments and survey responses.  */}
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);
 
