@@ -1,7 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
-import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { LiaGem } from "react-icons/lia";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();

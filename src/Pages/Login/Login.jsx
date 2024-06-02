@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet";
-import useAuth from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -7,10 +6,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { FaFacebook, FaGithub, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const { signInUser, signInWithGoogle, signInWithGitHub } = useAuth();
+  const { signInUser, signInWithGoogle, signInWithGitHub, signInWithFacebook } =
+    useAuth();
   const [show, setShow] = useState("false");
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,15 +21,37 @@ const Login = () => {
     signInWithGoogle()
       .then((userCredential) => {
         // console.log(userCredential.user);
+        const role = "user";
+        const name = userCredential.user.displayName;
+        const photoURL = userCredential.user.photoURL;
+        const email = userCredential.user.email;
         if (userCredential.user) {
-          Swal.fire({
-            title: "Successfully Google Login!",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate(from, { replace: true });
+          const addNewUser = { name, email, photoURL, role };
+
+          const url = "http://localhost:5000/user";
+          // send data to the server
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(addNewUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.insertedId) {
+                Swal.fire({
+                  title: "Successfully Google Login!",
+                  position: "top-end",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate(from, { replace: true });
+              }
+            });
         }
       })
       .catch((error) => {
@@ -41,10 +64,53 @@ const Login = () => {
   const handleGithub = () => {
     signInWithGitHub()
       .then((userCredential) => {
+        const role = "user";
+        const name = userCredential.user.displayName;
+        const photoURL = userCredential.user.photoURL;
+        const email = userCredential.user.email;
+        if (userCredential.user) {
+          const addNewUser = { name, email, photoURL, role };
+
+          const url = "http://localhost:5000/user";
+          // send data to the server
+
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(addNewUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.insertedId) {
+                Swal.fire({
+                  title: "Successfully Google Login!",
+                  position: "top-end",
+                  icon: "success",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate(from, { replace: true });
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        const GitError = error.message;
+        const notifyGitError = () => toast.error(GitError);
+        notifyGitError();
+      });
+  };
+  const handleFacebook = () => {
+    signInWithFacebook()
+      .then((userCredential) => {
         console.log(userCredential.user);
         if (userCredential.user) {
           Swal.fire({
-            title: "Successfully Github Login!",
+            title: "Successfully facebook Login!",
             position: "top-end",
             icon: "success",
             showConfirmButton: false,
@@ -156,7 +222,7 @@ const Login = () => {
               <FcGoogle className="text-lg" />
             </a>
             <a
-              // onClick={handleGoogle}
+              onClick={handleFacebook}
               className="px-2 border rounded-full btn btn-sm"
             >
               <FaFacebook className="text-xl text-blue-500" />

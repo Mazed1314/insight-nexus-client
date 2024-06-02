@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import LoadingSpinner from "../Component/Shared/LoadingSpinner";
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ children }) => {
@@ -9,7 +10,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center my-10">
-        <h2>please wait </h2>
+        <LoadingSpinner></LoadingSpinner>
       </div>
     );
   }

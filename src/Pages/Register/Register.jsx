@@ -4,8 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { updateProfile } from "firebase/auth";
 import { Helmet } from "react-helmet-async";
-import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
   const { createUser } = useAuth();
@@ -17,6 +17,7 @@ const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    const role = "user";
     const name = e.target.name.value;
     const photoURL = e.target.photoURL.value;
     const email = e.target.email.value;
@@ -52,19 +53,37 @@ const Register = () => {
 
     setRegisterError("");
 
-    // console.log(name, email, password, photoURL);
+    // console.log(name, email, password, photoURL, role);
     createUser(email, password)
       .then((userCredential) => {
         updateProfile(userCredential.user, {
           displayName: name,
           photoURL: photoURL,
         });
-        console.log(userCredential.user);
-        e.target.reset();
-        const notifySuccess = () =>
-          toast.success("Successfully register a user");
-        notifySuccess();
-        navigate(from, { replace: true });
+        // console.log(userCredential.user);
+        const addNewUser = { name, email, photoURL, role };
+
+        const url = "http://localhost:5000/user";
+        // send data to the server
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(addNewUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.insertedId) {
+              e.target.reset();
+              const notifySuccess = () =>
+                toast.success("Successfully register a user");
+              notifySuccess();
+              navigate(from, { replace: true });
+            }
+          });
       })
       .catch((error) => {
         console.error(error);
