@@ -1,7 +1,9 @@
 import { FaEnvelope, FaHome, FaSearch } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import UseRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const role = UseRole();
   return (
     <div className="min-h-screen md:flex">
       {/* Sidebar */}
@@ -26,11 +28,25 @@ const DashboardLayout = () => {
             <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
               {/* Sidebar content here */}
               <li>
-                <a>Sidebar Item 1</a>
+                <NavLink to="/dashboard">Dashboard</NavLink>
               </li>
               <li>
-                <a>Sidebar Item 2</a>
+                <NavLink to="/surveys">Surveys</NavLink>
               </li>
+              <li>
+                <NavLink to="/reports">Reports</NavLink>
+              </li>
+
+              {role == "pro" && (
+                <li>
+                  <NavLink to="/comments">Comments</NavLink>
+                </li>
+              )}
+              {role == "surveyor" && (
+                <li>
+                  <NavLink to="/create">Create Survey</NavLink>
+                </li>
+              )}
 
               <div className="divider"></div>
               <li>

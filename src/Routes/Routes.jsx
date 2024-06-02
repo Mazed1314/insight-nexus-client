@@ -57,29 +57,29 @@ const router = createBrowserRouter([
       //  User Dashboard:
       // --------------------------------------------------------------
       {
-        path: "/user/surveys",
+        path: "user/surveys",
         element: <PrivateRoute>{/* Participate in surveys */}</PrivateRoute>,
       },
       {
-        path: "/user/my-reports",
+        path: "user/my-reports",
         element: <PrivateRoute>{/* Reported surveys */}</PrivateRoute>,
       },
       // (only pro-user can access this page)
       {
-        path: "/user/comments",
+        path: "user/comments",
         element: <PrivateRoute>{/* Reported surveys */}</PrivateRoute>,
       },
       // ---------------------------------------------------------------
       //  Surveyor Dashboard:
       // --------------------------------------------------------------
       {
-        path: "/surveyor/create",
+        path: "surveyor/create",
         element: (
           <PrivateRoute>{/* Survey creation with questions. */}</PrivateRoute>
         ),
       },
       {
-        path: "/surveyor/update/:id",
+        path: "surveyor/update/:id",
         element: <PrivateRoute>{/* Survey update */}</PrivateRoute>,
       },
       // ---------------------------------------------------------------
@@ -87,11 +87,11 @@ const router = createBrowserRouter([
       // --------------------------------------------------------------
 
       {
-        path: "/admin/users",
+        path: "admin/users",
         element: <PrivateRoute>{/* Manage users and roles */}</PrivateRoute>,
       },
       {
-        path: "/admin/surveys",
+        path: "admin/surveys",
         element: (
           <PrivateRoute>
             {/* Publish/unpublish surveys.  */}
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/payments",
+        path: "admin/payments",
         element: (
           <PrivateRoute>
             {/* View all payments and survey responses.  */}

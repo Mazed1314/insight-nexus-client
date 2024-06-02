@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 // import useAxiosSecure from "./useAxiosSecure";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useRole = () => {
+const UseRole = () => {
   const { user, loading } = useAuth();
   // const axiosSecure = useAxiosSecure();
   const axiosSecure = useAxiosPublic();
@@ -22,4 +22,4 @@ const useRole = () => {
   return [role, isLoading];
 };
 
-export default useRole;
+export default UseRole;
