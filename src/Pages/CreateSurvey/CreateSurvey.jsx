@@ -38,7 +38,7 @@ const CreateSurvey = () => {
       startDate,
       endDate,
     };
-    console.log(addNewSurvey);
+    // console.log(addNewSurvey);
 
     const url = "http://localhost:5000/addSurvey";
     // send data to the server
@@ -60,7 +60,7 @@ const CreateSurvey = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          Navigate(-1);
+          Navigate("/surveys");
         }
       });
   };
@@ -139,19 +139,18 @@ const CreateSurvey = () => {
                 name="category_name"
                 className="rounded-md border border-black"
               >
+                <option value="Tech">Tech</option>
+                <option value="Health">Health</option>
                 <option value="Travel">Travel</option>
-                <option value="Technology">Technology</option>
-                <option value="Finance">Finance</option>
-                <option value="News">News</option>
-                <option value="Literature">Literature</option>
-                <option value="Fashion">Fashion </option>
-                <option value="Beauty">Beauty</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Food">Food</option>
                 <option value="Lifestyle">Lifestyle</option>
                 <option value="Parenting">Parenting</option>
-                <option value="Food">Food</option>
-                <option value="Health">Health</option>
-                <option value="Art&Craft">Art&Craft</option>
-                <option value="Photography">Other</option>
+                <option value="Finance">Finance</option>
+                <option value="Sports">Sports</option>
+                <option value="Education">Education</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 

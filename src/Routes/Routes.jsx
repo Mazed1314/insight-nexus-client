@@ -8,6 +8,9 @@ import PrivateRoute from "./PrivateRoute";
 import Surveys from "../Pages/Surveys/Surveys";
 import DashboardLayout from "../Layout/DashboardLayout";
 import ErrorPage from "../Component/Shared/ErrorPage";
+import ManageUsers from "../Component/ManageUsers";
+import Pricing from "../Pages/Pricing/Pricing";
+import SurveyDetails from "../Component/Shared/SurveyDetails";
 // import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
@@ -25,12 +28,25 @@ const router = createBrowserRouter([
         element: <Surveys></Surveys>,
       },
       {
+        path: "/pricing",
+        element: <Pricing></Pricing>,
+      },
+      {
         path: "/create-survey",
         element: (
           <PrivateRoute>
             <CreateSurvey></CreateSurvey>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/view-details/:_id",
+        element: (
+          <PrivateRoute>
+            <SurveyDetails></SurveyDetails>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("http://localhost:5000/surveys"),
       },
     ],
   },
@@ -75,7 +91,9 @@ const router = createBrowserRouter([
       {
         path: "surveyor/create",
         element: (
-          <PrivateRoute>{/* Survey creation with questions. */}</PrivateRoute>
+          <PrivateRoute>
+            <CreateSurvey></CreateSurvey>
+          </PrivateRoute>
         ),
       },
       {
@@ -88,7 +106,11 @@ const router = createBrowserRouter([
 
       {
         path: "admin/users",
-        element: <PrivateRoute>{/* Manage users and roles */}</PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ManageUsers></ManageUsers>
+          </PrivateRoute>
+        ),
       },
       {
         path: "admin/surveys",

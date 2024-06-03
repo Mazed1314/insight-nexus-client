@@ -4,21 +4,15 @@ import UseRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
   const role = UseRole();
+  console.log(role[0]);
+
   return (
     <div className="min-h-screen md:flex">
       {/* Sidebar */}
       <div className="">
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center justify-center">
-            {/* Page content here */}
-            <label
-              htmlFor="my-drawer-2"
-              className="btn btn-primary drawer-button lg:hidden"
-            >
-              Open drawer
-            </label>
-          </div>
+
           <div className="drawer-side">
             <label
               htmlFor="my-drawer-2"
@@ -31,21 +25,44 @@ const DashboardLayout = () => {
                 <NavLink to="/dashboard">Dashboard</NavLink>
               </li>
               <li>
-                <NavLink to="/surveys">Surveys</NavLink>
+                <NavLink to="/dashboard/surveys">Participate Surveys</NavLink>
               </li>
-              <li>
-                <NavLink to="/reports">Reports</NavLink>
-              </li>
-
-              {role == "pro" && (
+              {role[0] !== "admin" && (
                 <li>
-                  <NavLink to="/comments">Comments</NavLink>
+                  <NavLink to="/dashboard/reports">My Reports</NavLink>
                 </li>
               )}
-              {role == "surveyor" && (
+
+              {role[0] == "pro" && (
                 <li>
-                  <NavLink to="/create">Create Survey</NavLink>
+                  <NavLink to="/dashboard/comments">Comments</NavLink>
                 </li>
+              )}
+              {role[0] == "surveyor" && (
+                <li>
+                  <NavLink to="/dashboard/create">Create Survey</NavLink>
+                </li>
+              )}
+              {role[0] == "admin" && (
+                <>
+                  <li>
+                    <NavLink to="/dashboard/create">Create Survey</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/surveys">My Survey</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/admin/surveys">
+                      Manage Survey
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/admin/users">Manage Users</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/admin/payments">Payments</NavLink>
+                  </li>
+                </>
               )}
 
               <div className="divider"></div>
@@ -73,7 +90,17 @@ const DashboardLayout = () => {
       </div>
 
       {/* Outlet */}
-      <div className="p-5">
+      <div className="w-full m-2">
+        <div className="drawer-content flex flex-col items-center justify-center">
+          {/* Page content here */}
+          <label
+            htmlFor="my-drawer-2"
+            className="btn my-10 drawer-button lg:hidden"
+          >
+            Open Dashboard
+          </label>
+        </div>
+
         <Outlet></Outlet>
       </div>
     </div>

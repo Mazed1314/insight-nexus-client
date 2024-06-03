@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const axiosPublic = axios.create({
-  baseURL: "https://insight-nexus-server.vercel.app",
+  // baseURL: "https://insight-nexus-server.vercel.app",
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosPublic = () => {

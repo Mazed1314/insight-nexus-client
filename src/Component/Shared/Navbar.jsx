@@ -48,7 +48,7 @@ const Navbar = () => {
             ? "md:border-b-4 pb-2 border-yellow-500 text-yellow-500 font-bold"
             : "font-semibold"
         }
-        to="/pro"
+        to="/pricing"
       >
         <span className="flex">
           <LiaGem />
@@ -59,7 +59,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar z-10 bg-white bg-opacity-95 fixed top-0 left-0">
+    <div className="shadow-sm px-4 md:px-8 lg:px-16 navbar z-10 bg-white bg-opacity-90 fixed top-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -89,9 +89,11 @@ const Navbar = () => {
           InsightNexus
         </a>
       </div>
-      <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-2 space-x-5">{link}</ul>
+      <div className="navbar-center hidden md:flex">
+        <ul className="menu menu-horizontal px-1 gap-4">{link}</ul>
+      </div>
 
+      <div className="navbar-end">
         {user ? (
           <>
             <div className="dropdown dropdown-end z-10">
@@ -113,10 +115,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="space-y-1 menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <NavLink to="/profile" className={"hover:font-bold"}>
-                  Profile
-                </NavLink>
-                <NavLink to="dashboard" className={"hover:font-bold"}>
+                <NavLink to="/dashboard" className={"hover:font-bold"}>
                   Dashboard
                 </NavLink>
                 <NavLink
@@ -135,7 +134,7 @@ const Navbar = () => {
               <u>Login</u>
             </Link>
             <Link to="/register" className="font-medium hover:text-gray-500 ">
-              <u>Register</u>
+              <u>Sign Up</u>
             </Link>
           </>
         )}

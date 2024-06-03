@@ -4,9 +4,8 @@ import Navbar from "../Component/Shared/Navbar";
 const Root = () => {
   return (
     <div>
-      <div className="mx-2 md:mx-16 ">
-        <Navbar></Navbar>
-      </div>
+      <Navbar></Navbar>
+
       <div className="my-20">
         <Outlet></Outlet>
       </div>

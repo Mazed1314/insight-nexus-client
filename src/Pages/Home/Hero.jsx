@@ -2,13 +2,13 @@ const Hero = () => {
   const hero_img = "/images/hero-top-2x-take-a-tour-rebrand.png";
   return (
     <div className="hero min-h-screen bg-emerald-50">
-      <div className="lg:hero-content flex-col lg:flex-row-reverse">
-        <div className="w-1/2">
+      <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="lg:w-1/2">
           <img src={hero_img} className="w-full rounded-lg" />
         </div>
 
-        <div className="w-1/2">
-          <div className="lg:pl-40">
+        <div className="lg:w-1/2">
+          <div className="w-8/12 mx-auto">
             <h1 className="text-5xl text-teal-900 font-bold">
               Create your own surveys
             </h1>
