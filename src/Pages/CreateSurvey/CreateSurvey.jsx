@@ -7,7 +7,6 @@ import useAuth from "../../Hooks/useAuth";
 
 const CreateSurvey = () => {
   const { user } = useAuth();
-  //   const navigate = useNavigate();
 
   const handleSurvey = (event) => {
     event.preventDefault();

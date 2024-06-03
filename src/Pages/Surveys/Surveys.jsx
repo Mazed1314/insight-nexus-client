@@ -1,4 +1,4 @@
-import SurveyCard from "../../Component/Shared/SurveyCard";
+import SurveyCard from "./SurveyCard";
 
 import useServey from "../../Hooks/useServey";
 

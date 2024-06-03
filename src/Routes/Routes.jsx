@@ -10,7 +10,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import ErrorPage from "../Component/Shared/ErrorPage";
 import ManageUsers from "../Component/ManageUsers";
 import Pricing from "../Pages/Pricing/Pricing";
-import SurveyDetails from "../Component/Shared/SurveyDetails";
+import SurveyDetails from "../Pages/Surveys/SurveyDetails";
 // import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
