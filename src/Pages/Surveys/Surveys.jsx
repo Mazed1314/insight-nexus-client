@@ -1,10 +1,9 @@
 import SurveyCard from "./SurveyCard";
-
-import useServey from "../../Hooks/useServey";
 import LoadingSpinner from "../../Component/Shared/LoadingSpinner";
+import useSurvey from "../../Hooks/useSurvey";
 
 const Surveys = () => {
-  const [survey, loading] = useServey();
+  const [survey, loading] = useSurvey();
   if (loading) return <LoadingSpinner />;
   console.log(survey);
   return (

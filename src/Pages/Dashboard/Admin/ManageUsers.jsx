@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { NavLink } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
+// import { FiEdit } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
 import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ManageUsers = () => {
-  const axiosSecure = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     data: users = [],
     isLoading,
@@ -21,17 +21,15 @@ const ManageUsers = () => {
     },
   });
 
-  console.log(users);
-
-  const handleMakeAdmin = (user) => {
-    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+  const handleMakeAdmin = (id, name) => {
+    axiosSecure.patch(`/users/admin/${id}`).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
         refetch();
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${user.name} is an Admin Now!`,
+          title: `${name} is an Admin Now!`,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -39,7 +37,7 @@ const ManageUsers = () => {
     });
   };
 
-  const handleDeleteUser = (user) => {
+  const handleDeleteUser = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -50,7 +48,7 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+        axiosSecure.delete(`/users/${id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
             Swal.fire({
@@ -100,11 +98,25 @@ const ManageUsers = () => {
                 <span className="flex gap-1">
                   {user.role !== "admin" && (
                     <>
-                      <NavLink
-                        onClick={() => handleMakeAdmin(user)}
-                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                      {/* <select
+                        onClick={() => handleMakeAdmin()}
+                        name="category_name"
+                        className="shadow menu dropdown-content z-[1] bg-pink-100 rounded-box w-20"
                       >
-                        <FiEdit />
+                        <option disabled selected>
+                          Edit
+                        </option>
+                        <option value="Health">Make Admin</option>
+                        <option value="Travel">Make Surveyor</option>
+                        <option value="Travel">Make Pro</option>
+                        <option value="Travel">Make User</option>
+                      </select> */}
+
+                      <NavLink
+                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                        onClick={() => handleMakeAdmin(user._id, user.name)}
+                      >
+                        make admin
                       </NavLink>
 
                       <NavLink

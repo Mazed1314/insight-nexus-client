@@ -41,7 +41,7 @@ const Login = () => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              if (data.insertedId) {
+              if (data.insertedId || data.message === "user already exists") {
                 Swal.fire({
                   title: "Successfully Google Login!",
                   position: "top-end",
@@ -129,25 +129,24 @@ const Login = () => {
   const onSubmit = (data) => {
     const { email, password } = data;
 
-    signInUser(email, password)
-      .then((userCredential) => {
-        // console.log(userCredential.user);
-        if (userCredential.user) {
-          Swal.fire({
-            title: "Successfully Login!",
-            position: "top-end",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate(from, { replace: true });
-        }
-      })
-      .catch((error) => {
-        console.error(error.message);
-        const notify = () => toast.error("Wrong email or password");
-        notify();
-      });
+    signInUser(email, password).then((userCredential) => {
+      // console.log(userCredential.user);
+      if (userCredential.user) {
+        Swal.fire({
+          title: "Successfully Login!",
+          position: "top-end",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      }
+    });
+    // .catch((error) => {
+    //   console.error(error.message);
+    //   const notify = () => toast.error("Wrong email or password");
+    //   notify();
+    // });
   };
 
   return (

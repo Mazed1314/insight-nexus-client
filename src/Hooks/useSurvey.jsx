@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useServey = () => {
+const useSurvey = () => {
   const axiosPublic = useAxiosPublic();
 
   const {
@@ -20,4 +20,4 @@ const useServey = () => {
   return [survey, loading, refetch];
 };
 
-export default useServey;
+export default useSurvey;
