@@ -13,6 +13,7 @@ import SurveyDetails from "../Pages/Surveys/SurveyDetails";
 import AdminRoute from "./AdminRoute";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import SurveyorRoute from "./SurveyorRoute";
+// import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
+      // {
+      //   path: "/payment",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Payment></Payment>
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
         path: "/surveys",
         element: <Surveys></Surveys>,
@@ -49,7 +58,8 @@ const router = createBrowserRouter([
             <SurveyDetails></SurveyDetails>
           </PrivateRoute>
         ),
-        loader: () => fetch("https://insight-nexus-server.vercel.app/surveys"),
+        // loader: () => fetch("https://insight-nexus-server.vercel.app/surveys"),
+        loader: () => fetch("http://localhost:5000/surveys"),
       },
     ],
   },

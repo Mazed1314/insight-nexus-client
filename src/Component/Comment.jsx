@@ -3,16 +3,25 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
 import { MdDateRange } from "react-icons/md";
+import UseRole from "../Hooks/useRole";
 
 const Comment = ({ info }) => {
   const [item, setItem] = useState([]);
-  const { _id, surveyor, currentUserEmail, currentUserName, currentUserImage } =
-    info;
+  const [role] = UseRole();
+
+  const {
+    Surveyor_email,
+    currentUserEmail,
+    currentUserName,
+    currentUserImage,
+    _id,
+  } = info;
   const survey_id = _id;
 
   useEffect(() => {
     axios
-      .get(`https://insight-nexus-server.vercel.app/com/${survey_id}`)
+      .get(`http://localhost:5000/com/${survey_id}`)
+      // .get(`https://insight-nexus-server.vercel.app/com/${survey_id}`)
       .then((res) => {
         setItem(res.data);
       });
@@ -39,7 +48,8 @@ const Comment = ({ info }) => {
       commentTime,
     };
 
-    const url = "https://insight-nexus-server.vercel.app/com";
+    // const url = "https://insight-nexus-server.vercel.app/com";
+    const url = "http://localhost:5000/com";
     // send data to the server
     fetch(url, {
       method: "POST",
@@ -71,7 +81,7 @@ const Comment = ({ info }) => {
               Comment ({item.length})
             </h2>
           </div>
-          {surveyor != currentUserEmail && (
+          {Surveyor_email != currentUserEmail && role == "pro" && (
             <>
               <form onSubmit={handleSubmit} className="mb-6">
                 <div className="py-2 px-4 mb-4 bg-base-200 rounded-lg rounded-t-lg border ">

@@ -26,7 +26,7 @@ const SurveyDetails = () => {
     endDate,
     totalVotes,
   } = survey;
-  console.log(survey);
+  // console.log(survey);
 
   const currentUserEmail = user.email;
   const currentUserName = user.displayName;
@@ -52,7 +52,7 @@ const SurveyDetails = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(addNewVote);
+    // console.log(addNewVote);
 
     const url = "http://localhost:5000/vote";
     // send data to the server
@@ -161,7 +161,7 @@ const SurveyDetails = () => {
                         <input
                           type="radio"
                           name="vote"
-                          value="yes"
+                          value="1"
                           checked={vote === "yes"}
                           onChange={handleVoteChange}
                         />
@@ -171,7 +171,7 @@ const SurveyDetails = () => {
                         <input
                           type="radio"
                           name="vote"
-                          value="no"
+                          value="0"
                           checked={vote === "no"}
                           onChange={handleVoteChange}
                         />

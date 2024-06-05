@@ -15,7 +15,7 @@ const useSurvey = () => {
       return res.data;
     },
   });
-  console.log(survey);
+  // console.log(survey);
 
   return [survey, loading, refetch];
 };

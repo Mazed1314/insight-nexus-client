@@ -23,8 +23,8 @@ const Pricing = () => {
         <p className="text-gray-600 mb-4">
           Explore InsightNexus spacial feature
         </p>
-        <Link to={"/"}>
-          <button className="bg-teal-700 my-6 text-white p-2 rounded font-medium text-lg">
+        <Link to={"/payment"}>
+          <button className="bg-teal-700 my-6 text-white py-2 px-4 rounded font-medium text-lg">
             Buy
           </button>
         </Link>
@@ -65,8 +65,8 @@ const Pricing = () => {
           <span className="text-lg ml-1">/ user / month</span>
         </div>
         <p className="text-gray-600 mb-4">Survey With InsightNexus</p>
-        <Link to={"/"}>
-          <button className="bg-pink-700 my-6 text-white p-2 rounded font-medium text-lg">
+        <Link to={"/payment"}>
+          <button className="bg-pink-700 my-6 text-white py-2 px-4 rounded font-medium text-lg">
             Buy
           </button>
         </Link>

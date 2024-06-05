@@ -86,7 +86,11 @@ const Navbar = () => {
           </ul>
         </div>{" "}
         <a href="/" className="btn btn-ghost text-xl">
-          InsightNexus
+          <img
+            src="/images/insight-removebg-preview.png"
+            className="w-20"
+            alt=""
+          />
         </a>
       </div>
       <div className="navbar-center hidden md:flex">
