@@ -21,9 +21,7 @@ const DashboardLayout = () => {
             ></label>
             <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
               {/* Sidebar content here */}
-              <li>
-                <NavLink to="/dashboard">Dashboard</NavLink>
-              </li>
+
               <li>
                 <NavLink to="/dashboard/surveys">Participate Surveys</NavLink>
               </li>
@@ -45,12 +43,6 @@ const DashboardLayout = () => {
               )}
               {role[0] == "admin" && (
                 <>
-                  <li>
-                    <NavLink to="/dashboard/create">Create Survey</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/dashboard/surveys">My Survey</NavLink>
-                  </li>
                   <li>
                     <NavLink to="/dashboard/admin/surveys">
                       Manage Survey

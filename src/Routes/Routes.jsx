@@ -3,15 +3,16 @@ import Root from "../Layout/Root";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import ErrorPage from "../Pages/ErorrPage/ErrorPage";
 import CreateSurvey from "../Pages/CreateSurvey/CreateSurvey";
 import PrivateRoute from "./PrivateRoute";
 import Surveys from "../Pages/Surveys/Surveys";
 import DashboardLayout from "../Layout/DashboardLayout";
-import ErrorPage from "../Component/Shared/ErrorPage";
-import ManageUsers from "../Component/ManageUsers";
 import Pricing from "../Pages/Pricing/Pricing";
 import SurveyDetails from "../Pages/Surveys/SurveyDetails";
-// import AdminRoute from "./AdminRoute";
+import AdminRoute from "./AdminRoute";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import SurveyorRoute from "./SurveyorRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
         path: "/create-survey",
         element: (
           <PrivateRoute>
-            <CreateSurvey></CreateSurvey>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
           </PrivateRoute>
         ),
       },
@@ -46,7 +49,7 @@ const router = createBrowserRouter([
             <SurveyDetails></SurveyDetails>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/surveys"),
+        loader: () => fetch("https://insight-nexus-server.vercel.app/surveys"),
       },
     ],
   },
@@ -60,15 +63,6 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // {
-      //   index: true,
-      //   element: (
-      //     <PrivateRoute>
-      //       <Statistics />
-      //     </PrivateRoute>
-      //   ),
-      // },
-
       // ---------------------------------------------------------------
       //  User Dashboard:
       // --------------------------------------------------------------
@@ -92,7 +86,9 @@ const router = createBrowserRouter([
         path: "surveyor/create",
         element: (
           <PrivateRoute>
-            <CreateSurvey></CreateSurvey>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
           </PrivateRoute>
         ),
       },
@@ -108,7 +104,9 @@ const router = createBrowserRouter([
         path: "admin/users",
         element: (
           <PrivateRoute>
-            <ManageUsers></ManageUsers>
+            <AdminRoute>
+              <ManageUsers></ManageUsers>
+            </AdminRoute>
           </PrivateRoute>
         ),
       },

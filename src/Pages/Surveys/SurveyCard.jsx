@@ -78,7 +78,7 @@ const SurveyCard = ({ item }) => {
       <div className="bg-gray-200 py-3 px-6 flex gap-3 justify-center items-center">
         <NavLink
           to={`/view-details/${_id}`}
-          className=" text-black shadow px-4 py-2 rounded focus:outline-none"
+          className={` text-black shadow px-4 py-2 hover:${cardColor}rounded focus:outline-none`}
         >
           Details
         </NavLink>
