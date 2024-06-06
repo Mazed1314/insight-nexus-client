@@ -22,13 +22,18 @@ const DashboardLayout = () => {
             <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
               {/* Sidebar content here */}
 
-              <li>
-                <NavLink to="/dashboard/surveys">Participate Surveys</NavLink>
-              </li>
-              {role[0] !== "admin" && (
-                <li>
-                  <NavLink to="/dashboard/reports">My Reports</NavLink>
-                </li>
+              {role[0] !== "admin" && role[0] !== "surveyor" && (
+                <>
+                  <li>
+                    <NavLink to="/dashboard/surveys">
+                      Participate Surveys
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink to="/dashboard/reports">My Reports</NavLink>
+                  </li>
+                </>
               )}
 
               {role[0] == "pro" && (
@@ -37,9 +42,14 @@ const DashboardLayout = () => {
                 </li>
               )}
               {role[0] == "surveyor" && (
-                <li>
-                  <NavLink to="/dashboard/create">Create Survey</NavLink>
-                </li>
+                <>
+                  <li>
+                    <NavLink to="/dashboard/create">Create Survey</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/manage">Manage Survey</NavLink>
+                  </li>
+                </>
               )}
               {role[0] == "admin" && (
                 <>
@@ -87,9 +97,9 @@ const DashboardLayout = () => {
           {/* Page content here */}
           <label
             htmlFor="my-drawer-2"
-            className="btn my-10 drawer-button lg:hidden"
+            className="btn my-10 bg-amber-400 drawer-button lg:hidden"
           >
-            Open Dashboard
+            Open Menu
           </label>
         </div>
 

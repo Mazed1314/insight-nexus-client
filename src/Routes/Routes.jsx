@@ -13,6 +13,7 @@ import SurveyDetails from "../Pages/Surveys/SurveyDetails";
 import AdminRoute from "./AdminRoute";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import SurveyorRoute from "./SurveyorRoute";
+import EditSurvey from "../Pages/CreateSurvey/EditSurvey";
 // import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -47,6 +48,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <SurveyorRoute>
               <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/edit-survey/:id",
+        element: (
+          <PrivateRoute>
+            <SurveyorRoute>
+              <EditSurvey></EditSurvey>
             </SurveyorRoute>
           </PrivateRoute>
         ),
@@ -103,6 +114,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "surveyor/manage",
+        element: (
+          <PrivateRoute>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "surveyor/update/:id",
         element: <PrivateRoute>{/* Survey update */}</PrivateRoute>,
       },
@@ -116,6 +137,7 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <ManageUsers></ManageUsers>
+              {/* Filter users by role. */}
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -123,10 +145,7 @@ const router = createBrowserRouter([
       {
         path: "admin/surveys",
         element: (
-          <PrivateRoute>
-            {/* Publish/unpublish surveys.  */}
-            {/* Filter users by role. */}
-          </PrivateRoute>
+          <PrivateRoute>{/* Publish/unpublish surveys.  */}</PrivateRoute>
         ),
       },
       {

@@ -22,16 +22,28 @@ const ManageUsers = () => {
   });
 
   const handleMakeAdmin = (id, name) => {
-    axiosSecure.patch(`/users/admin/${id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${name} is an Admin Now!`,
-          showConfirmButton: false,
-          timer: 1500,
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Can you change the user role?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00B03B",
+      cancelButtonColor: "#FF6161",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/admin/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${name} is an Admin Now!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         });
       }
     });
@@ -43,8 +55,8 @@ const ManageUsers = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#00B03B",
+      cancelButtonColor: "#FF6161",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {

@@ -1,18 +1,66 @@
 import PropTypes from "prop-types";
-import { FaUser, FaCalendarAlt, FaPoll } from "react-icons/fa";
+import { FaUser, FaCalendarAlt, FaPoll, FaFlag } from "react-icons/fa";
+import Swal from "sweetalert2";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const SurveyCard = ({ item }) => {
-  const { _id, title, question, category, Surveyor_name, endDate, totalVotes } =
-    item;
+  const { user } = useAuth();
+  const {
+    _id,
+    title,
+    question,
+    category,
+    Surveyor_name,
+    Surveyor_email,
+    endDate,
+    totalVotes,
+  } = item;
+
+  const navigate = useNavigate();
+
+  // handle report
+  const handleReport = (event) => {
+    event.preventDefault();
+
+    const report = event.target.report.value;
+    const survey_id = _id;
+    const surveyor_email = Surveyor_email;
+    const reporter = user.email;
+
+    const getReport = { report, survey_id, reporter, surveyor_email };
+    console.log(getReport);
+
+    fetch("http://localhost:5000/reports", {
+      // fetch("https://insight-nexus-server.vercel.app/reports", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(getReport),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          navigate(-1);
+          Swal.fire({
+            position: "center",
+            title: "thank you for your feedback",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   // background color based on category
   const getCardColor = (category) => {
     if (category === "Health") {
       return "bg-blue-200 text-gray-500";
     } else if (category === "Education") {
-      return "bg-green-300 text-gray-500";
+      return "bg-fuchsia-300 text-gray-500";
     } else if (category === "Tech") {
       return "bg-violet-300 text-gray-700";
     } else if (category === "Parenting") {
@@ -24,7 +72,7 @@ const SurveyCard = ({ item }) => {
     } else if (category === "Fashion") {
       return "bg-yellow-200 text-gray-500";
     } else if (category === "Food") {
-      return "bg-sky-100 text-black";
+      return "bg-green-300 text-black";
     } else if (category === "Finance") {
       return "bg-blue-300 text-gray-800";
     } else if (category === "Sports") {
@@ -46,12 +94,12 @@ const SurveyCard = ({ item }) => {
       <div className="p-4">
         {/* header */}
         <div className="">
-          <h3 className="text-xl font-semibold ">{title}</h3>
+          <h3 className="text-xl font-semibold ">{title.slice(0, 20)}</h3>
           <div className="divider my-2"></div>
           <div className="flex justify-between">
             <div className="flex gap-2 items-center">
               <FaUser className="" />
-              <span className="text-sm ">{Surveyor_name}</span>
+              <span className="text-sm ">{Surveyor_name.slice(0, 15)}</span>
             </div>
             <span className="text-sm text-white bg-teal-600 rounded-full py-1 px-2">
               {category}
@@ -60,7 +108,7 @@ const SurveyCard = ({ item }) => {
         </div>
         {/* body */}
         <div className="">
-          <p className="mt-2">{question}</p>
+          <p className="mt-2">{question.slice(0, 50)}..</p>
 
           <div className="flex items-center mt-2">
             <FaCalendarAlt className="mr-2" />
@@ -71,6 +119,54 @@ const SurveyCard = ({ item }) => {
             <FaPoll className="mr-2" />
             <span className="text-sm">{totalVotes} votes</span>
           </div>
+          <div className="flex justify-end">
+            <span className="lg:tooltip" data-tip="Report">
+              <button
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+              >
+                <FaFlag className="text-gray-700" />
+              </button>
+            </span>
+          </div>
+
+          <dialog id="my_modal_3" className="modal">
+            <div className="modal-box">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+
+              <h3 className="font-bold text-lg text-center">
+                Inappropriate survey !
+              </h3>
+              <form onSubmit={handleReport}>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text text-lg font-semibold">
+                      What you think ?
+                    </span>
+                  </label>
+                  <textarea
+                    placeholder="give your opinion"
+                    name="report"
+                    required
+                    className="textarea textarea-bordered textarea-sm w-full bg-gray-100 text-black"
+                  ></textarea>
+                </div>
+
+                <div className="flex justify-center mt-4">
+                  <input
+                    type="submit"
+                    value="Report"
+                    className="btn btn-sm bg-gray-500 text-white rounded"
+                  />
+                </div>
+              </form>
+            </div>
+          </dialog>
         </div>
       </div>
 
@@ -85,6 +181,10 @@ const SurveyCard = ({ item }) => {
       </div>
     </div>
   );
+};
+
+SurveyCard.propTypes = {
+  item: PropTypes.object,
 };
 
 export default SurveyCard;

@@ -3,9 +3,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { updateProfile } from "firebase/auth";
-import { Helmet } from "react-helmet-async";
+
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { createUser } = useAuth();

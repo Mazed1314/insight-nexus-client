@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import Payment from "../Payment/Payment";
 
 const Pricing = () => {
   return (
@@ -23,8 +24,11 @@ const Pricing = () => {
         <p className="text-gray-600 mb-4">
           Explore InsightNexus spacial feature
         </p>
-        <Link to={"/payment"}>
-          <button className="bg-teal-700 my-6 text-white py-2 px-4 rounded font-medium text-lg">
+        <Link>
+          <button
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+            className="bg-teal-700 my-6 text-white py-2 px-4 rounded font-medium text-lg"
+          >
             Buy
           </button>
         </Link>
@@ -65,11 +69,15 @@ const Pricing = () => {
           <span className="text-lg ml-1">/ user / month</span>
         </div>
         <p className="text-gray-600 mb-4">Survey With InsightNexus</p>
-        <Link to={"/payment"}>
-          <button className="bg-pink-700 my-6 text-white py-2 px-4 rounded font-medium text-lg">
+        <Link>
+          <button
+            onClick={() => document.getElementById("my_modal_1").showModal()}
+            className="bg-pink-700 my-6 text-white py-2 px-4 rounded font-medium text-lg"
+          >
             Buy
           </button>
         </Link>
+        <Payment></Payment>
         <ul className="text-left space-y-2">
           <li>Create unlimited survey.</li>
           <li>Let team members analyze, filter, and export results</li>

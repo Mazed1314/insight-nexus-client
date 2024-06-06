@@ -5,12 +5,12 @@ import useSurvey from "../../Hooks/useSurvey";
 const Surveys = () => {
   const [survey, loading] = useSurvey();
   if (loading) return <LoadingSpinner />;
-  console.log(survey);
+  // console.log(survey);
   return (
     <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
       {survey.map((item) => (
         <>
-          <SurveyCard item={item}></SurveyCard>
+          <SurveyCard key={item._id} item={item}></SurveyCard>
         </>
       ))}
     </div>

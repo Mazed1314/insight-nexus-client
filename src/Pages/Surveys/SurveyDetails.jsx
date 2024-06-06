@@ -1,11 +1,16 @@
 // import { FaCalendarAlt, FaUser, FaThumbsUp, FaEdit } from "react-icons/fa";
-import { NavLink, Navigate, useLoaderData, useParams } from "react-router-dom";
+import {
+  NavLink,
+  useLoaderData,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import Comment from "../../Component/Comment";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet";
-import { MdCancel } from "react-icons/md";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { axiosPublic } from "../../Hooks/useAxiosPublic";
 // import { MdDateRange } from "react-icons/md";
 
 const SurveyDetails = () => {
@@ -13,6 +18,7 @@ const SurveyDetails = () => {
   const surveys = useLoaderData();
   const { _id } = useParams();
   const [vote, setVote] = useState("");
+  const navigate = useNavigate();
 
   const survey = surveys.find((c) => c._id == _id);
   const {
@@ -50,33 +56,20 @@ const SurveyDetails = () => {
   const handleVoteChange = (e) => {
     setVote(e.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmitVote = async (e) => {
     e.preventDefault();
-    // console.log(addNewVote);
-
-    const url = "http://localhost:5000/vote";
-    // send data to the server
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(addNewVote),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Created survey successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          Navigate(-1);
-        }
+    const getdate = await axiosPublic.post(`/vote`, addNewVote);
+    console.log(getdate.data);
+    if (getdate.data.insertedId) {
+      navigate(-1);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Thank You for vote",
+        showConfirmButton: false,
+        timer: 1500,
       });
+    }
   };
 
   return (
@@ -142,26 +135,22 @@ const SurveyDetails = () => {
               >
                 vote
               </button>
-              <dialog
-                id="my_modal_5"
-                className="modal modal-bottom sm:modal-middle"
-              >
+              <dialog id="my_modal_5" className="modal">
                 <div className="modal-box">
-                  <div className="modal-action">
-                    <form method="dialog">
-                      <button>
-                        <MdCancel className="text-2xl" />
-                      </button>
-                    </form>
-                  </div>
-                  <p className="py-4">{question}</p>
-                  <form onSubmit={handleSubmit}>
-                    <fieldset className="flex gap-4">
+                  <form method="dialog">
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                      ✕
+                    </button>
+                  </form>
+
+                  <h3 className=" text-center my-2">{question}</h3>
+                  <form onSubmit={handleSubmitVote}>
+                    <fieldset className="flex gap-4 justify-center">
                       <label>
                         <input
                           type="radio"
                           name="vote"
-                          value="1"
+                          value="yes"
                           checked={vote === "yes"}
                           onChange={handleVoteChange}
                         />
@@ -171,18 +160,19 @@ const SurveyDetails = () => {
                         <input
                           type="radio"
                           name="vote"
-                          value="0"
+                          value="no"
                           checked={vote === "no"}
                           onChange={handleVoteChange}
                         />
                         No
                       </label>
                     </fieldset>
-                    <div className="flex justify-center">
+
+                    <div className="flex justify-center mt-4">
                       <input
                         type="submit"
-                        value="submit"
-                        className="btn btn-sm border text-white bg-black text-lg font-bold"
+                        value="Submit"
+                        className="btn btn-sm bg-gray-500 text-white rounded"
                       />
                     </div>
                   </form>
