@@ -9,15 +9,18 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+  const [loadingGo, setLoadinGo] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState("false");
   const { register, handleSubmit } = useForm();
   const { signInUser, signInWithGoogle, signInWithGitHub, signInWithFacebook } =
     useAuth();
-  const [show, setShow] = useState("false");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const handleGoogle = () => {
+    setLoadinGo(true);
     signInWithGoogle()
       .then((userCredential) => {
         // console.log(userCredential.user);
@@ -49,6 +52,7 @@ const Login = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
+                setLoadinGo(false);
                 navigate(from, { replace: true });
               }
             });
@@ -71,7 +75,7 @@ const Login = () => {
         if (userCredential.user) {
           const addNewUser = { name, email, photoURL, role };
 
-          const url = "http://localhost:5000/user";
+          const url = "https://insight-nexus-server.vercel.app/user";
           // send data to the server
 
           fetch(url, {
@@ -127,26 +131,30 @@ const Login = () => {
       });
   };
   const onSubmit = (data) => {
+    setLoading(true);
     const { email, password } = data;
 
-    signInUser(email, password).then((userCredential) => {
-      // console.log(userCredential.user);
-      if (userCredential.user) {
-        Swal.fire({
-          title: "Successfully Login!",
-          position: "top-end",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate(from, { replace: true });
-      }
-    });
-    // .catch((error) => {
-    //   console.error(error.message);
-    //   const notify = () => toast.error("Wrong email or password");
-    //   notify();
-    // });
+    signInUser(email, password)
+      .then((userCredential) => {
+        // console.log(userCredential.user);
+        if (userCredential.user) {
+          Swal.fire({
+            title: "Successfully Login!",
+            position: "top-end",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setLoading(false);
+          navigate(from, { replace: true });
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+        const notify = () => toast.error("Wrong email or password");
+        notify();
+        setLoading(false);
+      });
   };
 
   return (
@@ -200,7 +208,13 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn bg-black text-xl text-white">Login</button>
+              <button className="btn bg-black text-xl text-white">
+                {loading === true ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  <span className="">Login</span>
+                )}
+              </button>
             </div>
           </form>
           <ToastContainer />
@@ -218,7 +232,11 @@ const Login = () => {
               onClick={handleGoogle}
               className="px-2 border rounded-full btn btn-sm"
             >
-              <FcGoogle className="text-lg" />
+              {loadingGo === true ? (
+                <span className="loading loading-spinner loading-xs"></span>
+              ) : (
+                <FcGoogle className="text-lg" />
+              )}
             </a>
             <a
               onClick={handleFacebook}

@@ -4,9 +4,14 @@ import Swal from "sweetalert2";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+// import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const SurveyCard = ({ item }) => {
+  const axiosSecure = useAxiosPublic();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const {
     _id,
     title,
@@ -15,11 +20,18 @@ const SurveyCard = ({ item }) => {
     Surveyor_name,
     Surveyor_email,
     endDate,
-    totalVotes,
   } = item;
 
-  const navigate = useNavigate();
-
+  const { data: vote = {}, isLoading } = useQuery({
+    queryKey: ["vote"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/vote/survey/${_id}`);
+      return data;
+    },
+  });
+  console.log(vote?.length);
+  console.log(_id);
+  // console.log(item);
   // handle report
   const handleReport = (event) => {
     event.preventDefault();
@@ -32,8 +44,8 @@ const SurveyCard = ({ item }) => {
     const getReport = { report, survey_id, reporter, surveyor_email };
     console.log(getReport);
 
-    fetch("http://localhost:5000/reports", {
-      // fetch("https://insight-nexus-server.vercel.app/reports", {
+    // fetch("http://localhost:5000/reports", {
+    fetch("https://insight-nexus-server.vercel.app/reports", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -86,7 +98,7 @@ const SurveyCard = ({ item }) => {
 
   // Get dynamic background color based on category
   const cardColor = getCardColor(category);
-
+  if (isLoading) return "wait";
   return (
     <div
       className={`rounded-lg border w-[250px] shadow-md overflow-hidden ${cardColor} flex flex-col justify-between`}
@@ -117,7 +129,7 @@ const SurveyCard = ({ item }) => {
 
           <div className="flex items-center mt-4">
             <FaPoll className="mr-2" />
-            <span className="text-sm">{totalVotes} votes</span>
+            <span className="text-sm">{vote?.length} votes</span>
           </div>
           <div className="flex justify-end">
             <span className="lg:tooltip" data-tip="Report">

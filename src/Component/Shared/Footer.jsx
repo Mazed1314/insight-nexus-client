@@ -15,10 +15,9 @@ const Footer = () => {
               About InsightNexus
             </h4>
             <p className="text-sm text-center">
-              InsightNexus is more than just a website; Our mission is to
-              provide a space where artists can showcase their talents, connect
-              with like-minded individuals, and inspire one another to push the
-              boundaries of creativity.
+              InsightNexus is a premier online survey platform dedicated to
+              gathering valuable insights through user-friendly and efficient
+              surveys
             </p>
           </div>
           <div className="mb-8 text-center">

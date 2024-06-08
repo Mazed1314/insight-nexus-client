@@ -14,6 +14,12 @@ import AdminRoute from "./AdminRoute";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import SurveyorRoute from "./SurveyorRoute";
 import EditSurvey from "../Pages/CreateSurvey/EditSurvey";
+import MyReport from "../Pages/Dashboard/User/MyReport";
+import ManageSurvey from "../Pages/Dashboard/Admin/ManageSurvey";
+
+import ManageSurveyDetails from "../Pages/Dashboard/Admin/ManageSurveyDetails";
+import Profile from "../Pages/Dashboard/Profile";
+import EditProfile from "../Pages/Dashboard/EditProfile";
 // import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -46,9 +52,7 @@ const router = createBrowserRouter([
         path: "/create-survey",
         element: (
           <PrivateRoute>
-            <SurveyorRoute>
-              <CreateSurvey></CreateSurvey>
-            </SurveyorRoute>
+            <CreateSurvey></CreateSurvey>
           </PrivateRoute>
         ),
       },
@@ -69,13 +73,12 @@ const router = createBrowserRouter([
             <SurveyDetails></SurveyDetails>
           </PrivateRoute>
         ),
-        // loader: () => fetch("https://insight-nexus-server.vercel.app/surveys"),
-        loader: () => fetch("http://localhost:5000/surveys"),
       },
+      { path: "/login", element: <Login></Login> },
+      { path: "/register", element: <Register></Register> },
     ],
   },
-  { path: "/login", element: <Login></Login> },
-  { path: "/register", element: <Register></Register> },
+
   {
     path: "/dashboard",
     element: (
@@ -84,6 +87,22 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile/edit-user",
+        element: (
+          <PrivateRoute>
+            <EditProfile></EditProfile>
+          </PrivateRoute>
+        ),
+      },
       // ---------------------------------------------------------------
       //  User Dashboard:
       // --------------------------------------------------------------
@@ -93,7 +112,11 @@ const router = createBrowserRouter([
       },
       {
         path: "user/my-reports",
-        element: <PrivateRoute>{/* Reported surveys */}</PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyReport></MyReport>
+          </PrivateRoute>
+        ),
       },
       // (only pro-user can access this page)
       {
@@ -107,9 +130,7 @@ const router = createBrowserRouter([
         path: "surveyor/create",
         element: (
           <PrivateRoute>
-            <SurveyorRoute>
-              <CreateSurvey></CreateSurvey>
-            </SurveyorRoute>
+            <CreateSurvey></CreateSurvey>
           </PrivateRoute>
         ),
       },
@@ -117,9 +138,7 @@ const router = createBrowserRouter([
         path: "surveyor/manage",
         element: (
           <PrivateRoute>
-            <SurveyorRoute>
-              <CreateSurvey></CreateSurvey>
-            </SurveyorRoute>
+            <CreateSurvey></CreateSurvey>
           </PrivateRoute>
         ),
       },
@@ -132,6 +151,26 @@ const router = createBrowserRouter([
       // --------------------------------------------------------------
 
       {
+        path: "admin/surveys",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageSurvey></ManageSurvey>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "admin/surveys/view-details/:id",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageSurveyDetails></ManageSurveyDetails>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "admin/users",
         element: (
           <PrivateRoute>
@@ -140,12 +179,6 @@ const router = createBrowserRouter([
               {/* Filter users by role. */}
             </AdminRoute>
           </PrivateRoute>
-        ),
-      },
-      {
-        path: "admin/surveys",
-        element: (
-          <PrivateRoute>{/* Publish/unpublish surveys.  */}</PrivateRoute>
         ),
       },
       {

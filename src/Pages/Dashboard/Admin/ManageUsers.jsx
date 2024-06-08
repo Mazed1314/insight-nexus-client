@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
 import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -77,6 +78,9 @@ const ManageUsers = () => {
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+        <title>Manage Users</title>
+      </Helmet>
       <div className="flex justify-start my-4">
         <FaUsers className="text-2xl mr-2" /> : {users.length}
       </div>

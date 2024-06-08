@@ -19,35 +19,43 @@ const DashboardLayout = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+            <ul className="menu z-20 p-4 w-80 min-h-full bg-base-200 text-base-content">
               {/* Sidebar content here */}
-
+              <li>
+                <NavLink to="/dashboard/profile">profile</NavLink>
+              </li>
               {role[0] !== "admin" && role[0] !== "surveyor" && (
                 <>
                   <li>
-                    <NavLink to="/dashboard/surveys">
+                    <NavLink to="/dashboard/user/surveys">
                       Participate Surveys
                     </NavLink>
                   </li>
 
                   <li>
-                    <NavLink to="/dashboard/reports">My Reports</NavLink>
+                    <NavLink to="/dashboard/user/my-reports">
+                      My Reports
+                    </NavLink>
                   </li>
                 </>
               )}
 
               {role[0] == "pro" && (
                 <li>
-                  <NavLink to="/dashboard/comments">Comments</NavLink>
+                  <NavLink to="/dashboard/user/comments">Comments</NavLink>
                 </li>
               )}
               {role[0] == "surveyor" && (
                 <>
                   <li>
-                    <NavLink to="/dashboard/create">Create Survey</NavLink>
+                    <NavLink to="/dashboard/surveyor/create">
+                      Create Survey
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/manage">Manage Survey</NavLink>
+                    <NavLink to="/dashboard/surveyor/manage">
+                      Manage Survey
+                    </NavLink>
                   </li>
                 </>
               )}

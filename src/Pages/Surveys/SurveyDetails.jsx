@@ -1,26 +1,29 @@
 // import { FaCalendarAlt, FaUser, FaThumbsUp, FaEdit } from "react-icons/fa";
-import {
-  NavLink,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Comment from "../../Component/Comment";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { axiosPublic } from "../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import LoadingSpinner from "../../Component/Shared/LoadingSpinner";
+import { useQuery } from "@tanstack/react-query";
 // import { MdDateRange } from "react-icons/md";
 
 const SurveyDetails = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const surveys = useLoaderData();
   const { _id } = useParams();
   const [vote, setVote] = useState("");
   const navigate = useNavigate();
 
-  const survey = surveys.find((c) => c._id == _id);
+  const { data: survey = {}, isLoading } = useQuery({
+    queryKey: ["survey", _id],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/surveys/${_id}`);
+      return data;
+    },
+  });
   const {
     title,
     question,
@@ -37,6 +40,7 @@ const SurveyDetails = () => {
   const currentUserEmail = user.email;
   const currentUserName = user.displayName;
   const currentUserImage = user.photoURL;
+  const survey_id = _id;
   const info = {
     Surveyor_email,
     currentUserEmail,
@@ -50,18 +54,20 @@ const SurveyDetails = () => {
     currentUserEmail,
     vote,
     currentUserImage,
-    _id,
+    survey_id,
   };
 
   const handleVoteChange = (e) => {
     setVote(e.target.value);
   };
+
   const handleSubmitVote = async (e) => {
     e.preventDefault();
-    const getdate = await axiosPublic.post(`/vote`, addNewVote);
-    console.log(getdate.data);
-    if (getdate.data.insertedId) {
+    const getVote = await axiosSecure.post(`/vote`, addNewVote);
+    console.log(getVote.data);
+    if (getVote.data.insertedId) {
       navigate(-1);
+      e.target.classList.add("btn-disabled");
       Swal.fire({
         position: "center",
         icon: "success",
@@ -72,6 +78,7 @@ const SurveyDetails = () => {
     }
   };
 
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className="">
       <div className="mx-4 min-h-screen md:w-8/12 md:mx-auto">
@@ -128,6 +135,7 @@ const SurveyDetails = () => {
             <div className="flex justify-center">
               {/* Open the modal using document.getElementById('ID').showModal() method */}
               <button
+                id="vote"
                 className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
                 onClick={() =>
                   document.getElementById("my_modal_5").showModal()

@@ -20,8 +20,8 @@ const Comment = ({ info }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/com/${survey_id}`)
-      // .get(`https://insight-nexus-server.vercel.app/com/${survey_id}`)
+      // .get(`http://localhost:5000/com/${survey_id}`)
+      .get(`https://insight-nexus-server.vercel.app/com/${survey_id}`)
       .then((res) => {
         setItem(res.data);
       });
@@ -48,8 +48,8 @@ const Comment = ({ info }) => {
       commentTime,
     };
 
-    // const url = "https://insight-nexus-server.vercel.app/com";
-    const url = "http://localhost:5000/com";
+    const url = "https://insight-nexus-server.vercel.app/com";
+    // const url = "http://localhost:5000/com";
     // send data to the server
     fetch(url, {
       method: "POST",

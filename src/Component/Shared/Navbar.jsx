@@ -25,8 +25,8 @@ const Navbar = () => {
       <NavLink
         className={({ isActive }) =>
           isActive
-            ? "md:border-b-4 pb-2 border-yellow-500 text-yellow-500 font-bold"
-            : "font-semibold"
+            ? "md:border-b-4 pb-2 border-black text-black font-bold"
+            : "font-bold"
         }
         to="/"
       >
@@ -35,26 +35,24 @@ const Navbar = () => {
       <NavLink
         className={({ isActive }) =>
           isActive
-            ? "md:border-b-4 pb-2 border-yellow-500 text-yellow-500 font-bold"
-            : "font-semibold"
+            ? "md:border-b-4 pb-2 border-black text-black font-bold"
+            : "font-bold"
         }
         to="/surveys"
       >
         Surveys
       </NavLink>
-      <Link
+      <NavLink
         className={({ isActive }) =>
           isActive
-            ? "md:border-b-4 pb-2 border-yellow-500 text-yellow-500 font-bold"
-            : "font-semibold"
+            ? "md:border-b-4 pb-2 flex border-black text-black font-bold"
+            : "font-bold flex"
         }
         to="/pricing"
       >
-        <span className="flex">
-          <LiaGem />
-          <span className="font-semibold">Pricing</span>
-        </span>
-      </Link>
+        <LiaGem />
+        Pricing
+      </NavLink>
     </>
   );
 

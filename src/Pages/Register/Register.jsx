@@ -12,12 +12,14 @@ const Register = () => {
   const { createUser } = useAuth();
   const [registerError, setRegisterError] = useState("");
   const [show, setShow] = useState("false");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (e) => {
     e.preventDefault();
+    setLoading(true);
     const role = "user";
     const name = e.target.name.value;
     const photoURL = e.target.photoURL.value;
@@ -62,7 +64,7 @@ const Register = () => {
           photoURL: photoURL,
         });
         // console.log(userCredential.user);
-        const addNewUser = { name, email, photoURL, role };
+        const addNewUser = { name, email, photoURL, role, password };
 
         const url = "https://insight-nexus-server.vercel.app/user";
         // send data to the server
@@ -82,6 +84,7 @@ const Register = () => {
               const notifySuccess = () =>
                 toast.success("Successfully register a user");
               notifySuccess();
+              setLoading(false);
               navigate(from, { replace: true });
             }
           });
@@ -171,7 +174,11 @@ const Register = () => {
             )}
             <div className="form-control mt-6">
               <button className="btn bg-black text-xl text-white">
-                Register
+                {loading === true ? (
+                  <span className="loading loading-spinner loading-xs"></span>
+                ) : (
+                  <span className="">Register</span>
+                )}
               </button>
             </div>
           </form>
