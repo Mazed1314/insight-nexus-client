@@ -25,7 +25,7 @@ const SurveyDetails = () => {
       return data;
     },
   });
-  console.log(votes?.length);
+  // console.log(_id);
 
   // get survey by id
   const { data: survey = {}, isLoading } = useQuery({

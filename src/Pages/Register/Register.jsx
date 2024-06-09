@@ -80,18 +80,18 @@ const Register = () => {
           .then((data) => {
             console.log(data);
             if (data.insertedId) {
+              setLoading(false);
               e.target.reset();
               const notifySuccess = () =>
                 toast.success("Successfully register a user");
               notifySuccess();
-              setLoading(false);
               navigate(from, { replace: true });
             }
           });
       })
       .catch((error) => {
         console.error(error);
-        // setRegisterError(error.message);
+        setRegisterError(error.message);
         const test = error.message;
         const notify = () => toast.warning(test);
         notify();

@@ -2,12 +2,12 @@
 // import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 
 const CreateSurvey = () => {
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const handleSurvey = (event) => {
     event.preventDefault();
 
@@ -59,7 +59,7 @@ const CreateSurvey = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          Navigate("/surveys");
+          navigate("/dashboard/surveyor/manage");
         }
       });
   };

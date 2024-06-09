@@ -2,14 +2,24 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import useAuth from "../../Hooks/useAuth";
-import UseRole from "../../Hooks/useRole";
-// import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../Component/Shared/LoadingSpinner";
 
 const Profile = () => {
   const { user } = useAuth();
-  const [role] = UseRole();
-  const id = "6663f6543b701a9a8755aad0";
-  // console.log(user);
+
+  const axiosSecure = useAxiosSecure();
+  const { data: Dusers = {}, loading } = useQuery({
+    queryKey: ["Duser"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/users/${user.email}`);
+      return data;
+    },
+  });
+
+  // console.log(Dusers);
+  if (loading) return <LoadingSpinner />;
   return (
     <div className="flex justify-center py-4 rounded-t-md ">
       <Helmet>
@@ -17,7 +27,7 @@ const Profile = () => {
       </Helmet>
       <div className="relative flex flex-col justify-center p-6 shadow-md rounded-xl sm:px-12 card border contrast-125 border-black drop-shadow-2xl mb-4 shrink-0 w-full max-w-sm  bg-base-100">
         <img
-          src={user?.photoURL}
+          src={Dusers?.photoURL}
           alt=""
           className="w-32 h-32 mx-auto rounded-full bg-gray-500"
         />
@@ -26,12 +36,17 @@ const Profile = () => {
             <h2 className="text-xl font-semibold sm:text-2xl">
               {user?.displayName}
             </h2>
-            <p className="px-5 text-xs sm:text-base text-gray-600">{role}</p>
+            <p className="px-5 text-xs sm:text-base text-gray-600">
+              {Dusers.role === "admin" && "Admin"}
+              {Dusers.role === "pro" && "Premium User"}
+              {Dusers.role === "surveyor" && "Surveyor"}
+              {Dusers.role === "user" && "User"}
+            </p>
           </div>
           <div className="">
             <p className="px-5 text-xs sm:text-base ">
               <span className="font-semibold">Email : </span>
-              <span className="text-gray-600">{user?.email}</span>
+              <span className="text-gray-600">{Dusers?.email}</span>
             </p>
             <p className="px-5 text-xs sm:text-base ">
               <span className=" font-semibold">ProviderId :</span>{" "}
@@ -41,8 +56,8 @@ const Profile = () => {
             </p>
           </div>
           <div className="flex justify-center pt-2 space-x-4 align-center">
-            <Link to={`edit-user/${id}`}>
-              <FaEdit className="absolute top-2 right-2 text-2xl hover:text-blue-600" />
+            <Link to={`edit-user/${Dusers._id}`}>
+              <FaEdit className="absolute top-2 right-2 text-2xl hover:text-black" />
             </Link>
             <a
               rel="noopener noreferrer"

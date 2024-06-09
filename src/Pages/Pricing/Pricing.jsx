@@ -11,7 +11,7 @@ const Pricing = () => {
 
       {/* card one */}
 
-      <div className="max-w-sm w-72 h-96 overflow-clip p-4 border border-gray-300 rounded-lg shadow-lg relative text-center">
+      {/* <div className="max-w-sm w-72 h-96 overflow-clip p-4 border border-gray-300 rounded-lg shadow-lg relative text-center">
         <div className="absolute top-4 -right-2 rounded-t bg-teal-700 text-white py-1 px-2 rotate-45 text-xs font-bold">
           Save 25%
         </div>
@@ -36,7 +36,7 @@ const Pricing = () => {
           <li>Comment every where</li>
           <li>Protect your account more securely</li>
         </ul>
-      </div>
+      </div> */}
       {/* card two */}
 
       <div className="max-w-sm w-72 h-96 overflow-clip p-4 border border-gray-300 rounded-lg shadow-lg text-center">
@@ -59,11 +59,11 @@ const Pricing = () => {
 
       {/* card three */}
       <div className="max-w-sm w-72 h-96 overflow-clip p-4 border border-gray-300 rounded-lg shadow-lg relative text-center">
-        <div className="absolute top-4 -right-2 rounded-t bg-pink-700 text-white py-1 px-2 rotate-45 text-xs font-bold">
+        <div className="absolute top-4 -right-2 rounded-t bg-teal-700 text-white py-1 px-2 rotate-45 text-xs font-bold">
           Save 20%
         </div>
 
-        <h2 className="text-2xl font-semibold mt-4">Become Surveyor</h2>
+        <h2 className="text-2xl font-semibold mt-4">Become A Premium User</h2>
         <div className="flex justify-center items-baseline mt-2 mb-4">
           <span className="text-4xl font-bold">$30</span>
           <span className="text-lg ml-1">/ user / month</span>
@@ -72,15 +72,16 @@ const Pricing = () => {
         <Link>
           <button
             onClick={() => document.getElementById("my_modal_1").showModal()}
-            className="bg-pink-700 my-6 text-white py-2 px-4 rounded font-medium text-lg"
+            className="bg-teal-700 my-6 text-white py-2 px-4 rounded font-medium text-lg"
           >
             Buy
           </button>
         </Link>
-        <Payment></Payment>
+        <Payment price={30}></Payment>
         <ul className="text-left space-y-2">
+          <li>Comment every where</li>
+          <li>Protect your account more securely</li>
           <li>Create unlimited survey.</li>
-          <li>Let team members analyze, filter, and export results</li>
           <li>Notify others when you get new responses</li>
         </ul>
       </div>

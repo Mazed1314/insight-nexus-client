@@ -45,6 +45,7 @@ const Login = () => {
             .then((data) => {
               console.log(data);
               if (data.insertedId || data.message === "user already exists") {
+                setLoadinGo(false);
                 Swal.fire({
                   title: "Successfully Google Login!",
                   position: "top-end",
@@ -52,7 +53,7 @@ const Login = () => {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                setLoadinGo(false);
+
                 navigate(from, { replace: true });
               }
             });

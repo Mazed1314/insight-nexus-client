@@ -19,6 +19,9 @@ import Profile from "../Pages/Dashboard/Profile";
 import EditProfile from "../Pages/Dashboard/EditProfile";
 import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
 import EditSurvey from "../Pages/Dashboard/Surveyor/EditSurvey";
+import ManageSurveyorSurvey from "../Pages/Dashboard/Surveyor/ManageSurveyorSurvey";
+import ViewDetails from "../Pages/Dashboard/Surveyor/ViewDetails";
+import ManageComent from "../Pages/Dashboard/Pro/ManageComent";
 // import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -31,14 +34,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
-      // {
-      //   path: "/payment",
-      //   element: (
-      //     <PrivateRoute>
-      //       <Payment></Payment>
-      //     </PrivateRoute>
-      //   ),
-      // },
+
       {
         path: "/surveys",
         element: <Surveys></Surveys>,
@@ -51,7 +47,9 @@ const router = createBrowserRouter([
         path: "/create-survey",
         element: (
           <PrivateRoute>
-            <CreateSurvey></CreateSurvey>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
           </PrivateRoute>
         ),
       },
@@ -120,7 +118,11 @@ const router = createBrowserRouter([
       // (only pro-user can access this page)
       {
         path: "user/comments",
-        element: <PrivateRoute>{/* Reported surveys */}</PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ManageComent></ManageComent>
+          </PrivateRoute>
+        ),
       },
       // ---------------------------------------------------------------
       //  Surveyor Dashboard:
@@ -137,13 +139,20 @@ const router = createBrowserRouter([
         path: "surveyor/manage",
         element: (
           <PrivateRoute>
-            <CreateSurvey></CreateSurvey>
+            <ManageSurveyorSurvey></ManageSurveyorSurvey>
           </PrivateRoute>
         ),
       },
+
       {
-        path: "surveyor/update/:id",
-        element: <PrivateRoute>{/* Survey update */}</PrivateRoute>,
+        path: "surveyor/manage/surveys/view-details/:id",
+        element: (
+          <PrivateRoute>
+            <SurveyorRoute>
+              <ViewDetails></ViewDetails>
+            </SurveyorRoute>
+          </PrivateRoute>
+        ),
       },
       // ---------------------------------------------------------------
       //  Admin Dashboard:

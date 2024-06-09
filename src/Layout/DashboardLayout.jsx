@@ -24,7 +24,7 @@ const DashboardLayout = () => {
               <li>
                 <NavLink to="/dashboard/profile">profile</NavLink>
               </li>
-              {role[0] !== "admin" && role[0] !== "surveyor" && (
+              {role[0] === "user" && (
                 <>
                   <li>
                     <NavLink to="/dashboard/user/surveys">
@@ -40,12 +40,25 @@ const DashboardLayout = () => {
                 </>
               )}
 
-              {role[0] == "pro" && (
-                <li>
-                  <NavLink to="/dashboard/user/comments">Comments</NavLink>
-                </li>
+              {role[0] === "pro" && (
+                <>
+                  <li>
+                    <NavLink to="/dashboard/user/surveys">
+                      Participate Surveys
+                    </NavLink>
+                  </li>
+
+                  <li>
+                    <NavLink to="/dashboard/user/my-reports">
+                      My Reports
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/user/comments">Comments</NavLink>
+                  </li>
+                </>
               )}
-              {role[0] == "surveyor" && (
+              {role[0] === "surveyor" && (
                 <>
                   <li>
                     <NavLink to="/dashboard/surveyor/create">
@@ -59,7 +72,7 @@ const DashboardLayout = () => {
                   </li>
                 </>
               )}
-              {role[0] == "admin" && (
+              {role[0] === "admin" && (
                 <>
                   <li>
                     <NavLink to="/dashboard/admin/surveys">
@@ -83,13 +96,13 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/order/salad">
+                <NavLink to="/">
                   <FaSearch></FaSearch>
                   Menu
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/order/contact">
+                <NavLink to="/">
                   <FaEnvelope></FaEnvelope>
                   Contact
                 </NavLink>
