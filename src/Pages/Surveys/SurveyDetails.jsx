@@ -17,6 +17,17 @@ const SurveyDetails = () => {
   const [vote, setVote] = useState("");
   const navigate = useNavigate();
 
+  // get vote by id
+  const { data: votes = {} } = useQuery({
+    queryKey: ["vote"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/vote/survey/${_id}`);
+      return data;
+    },
+  });
+  console.log(votes?.length);
+
+  // get survey by id
   const { data: survey = {}, isLoading } = useQuery({
     queryKey: ["survey", _id],
     queryFn: async () => {
@@ -33,7 +44,6 @@ const SurveyDetails = () => {
     description,
     Surveyor_name,
     endDate,
-    totalVotes,
   } = survey;
   // console.log(survey);
 
@@ -49,6 +59,7 @@ const SurveyDetails = () => {
     _id,
   };
 
+  // handle vote
   const addNewVote = {
     Surveyor_email,
     currentUserEmail,
@@ -115,7 +126,7 @@ const SurveyDetails = () => {
           What you think ?
           <p className="text-lg py-2 text-gray-500">{question}</p>
           <div className="my-2 flex flex-col md:flex-row gap-2 justify-between">
-            <span>Total Votes: {totalVotes}</span>
+            <span>Total Votes: {votes?.length}</span>
             <span>End Date : {endDate}</span>
           </div>
         </div>

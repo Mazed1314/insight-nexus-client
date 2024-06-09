@@ -1,61 +1,49 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { NavLink } from "react-router-dom";
 
 const MyReport = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   //   my - report;
-  const { data: report = [] } = useQuery({
-    queryKey: ["report"],
+  const { data: reports = {} } = useQuery({
+    queryKey: ["reports"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/reports/`);
-      return res.data;
+      const { data } = await axiosSecure.get(`/reports/email/${user.email}`);
+      return data;
     },
   });
-
-  console.log(report);
-
-  // survey
-  //   const { data: survey = [], isPending: loadingS } = useQuery({
-  //     queryKey: ["survey"],
-  //     queryFn: async () => {
-  //       const res = await axiosPublic.get(
-  //         "https://insight-nexus-server.vercel.app/reports/"
-  //       );
-  //       return res.data;
-  //     },
-  //   });
-
+  console.log(user.email);
+  console.log(reports.length);
   return (
     <div>
-      {/* card */}
-      <h2 className="text-center font-bold text-2xl my-4">
-        Your reported survey
-      </h2>
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="card-body">
-          <div className="card-actions justify-end">
-            <button className="btn btn-square btn-sm">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+      {reports.length < 1 && (
+        <h2 className="text-center my-2">You dont give report any survey</h2>
+      )}
+      {reports.length > 0 && (
+        <>
+          <h2 className="text-center my-2">
+            You given report following surveys
+          </h2>
+          {reports.map((item, index) => (
+            <>
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-md p-6 my-2"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <p>We are using cookies for no reason.</p>
-        </div>
-      </div>
+                <p>{item.report}</p>
+                <NavLink
+                  to={`/view-details/${item._id}`}
+                  className={` text-black shadow px-4 py-2 rounded focus:outline-none`}
+                >
+                  Details
+                </NavLink>
+              </div>
+            </>
+          ))}
+        </>
+      )}
     </div>
   );
 };

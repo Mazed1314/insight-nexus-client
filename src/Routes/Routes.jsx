@@ -4,7 +4,6 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ErrorPage from "../Pages/ErorrPage/ErrorPage";
-import CreateSurvey from "../Pages/CreateSurvey/CreateSurvey";
 import PrivateRoute from "./PrivateRoute";
 import Surveys from "../Pages/Surveys/Surveys";
 import DashboardLayout from "../Layout/DashboardLayout";
@@ -13,13 +12,13 @@ import SurveyDetails from "../Pages/Surveys/SurveyDetails";
 import AdminRoute from "./AdminRoute";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import SurveyorRoute from "./SurveyorRoute";
-import EditSurvey from "../Pages/CreateSurvey/EditSurvey";
 import MyReport from "../Pages/Dashboard/User/MyReport";
 import ManageSurvey from "../Pages/Dashboard/Admin/ManageSurvey";
-
 import ManageSurveyDetails from "../Pages/Dashboard/Admin/ManageSurveyDetails";
 import Profile from "../Pages/Dashboard/Profile";
 import EditProfile from "../Pages/Dashboard/EditProfile";
+import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
+import EditSurvey from "../Pages/Dashboard/Surveyor/EditSurvey";
 // import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -96,7 +95,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "profile/edit-user",
+        path: "profile/edit-user/:id",
         element: (
           <PrivateRoute>
             <EditProfile></EditProfile>

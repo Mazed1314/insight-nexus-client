@@ -1,48 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import LoadingSpinner from "../../Component/Shared/LoadingSpinner";
+// import Swal from "Swal";
+// import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import { Navigate } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
-const EditSurvey = () => {
-  const { id } = useParams();
-  const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
+const CreateSurvey = () => {
+  const { user } = useAuth();
 
-  const { data: survey = {}, isLoading } = useQuery({
-    queryKey: ["survey", id],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get(`/surveys/${id}`);
-      return data;
-    },
-  });
-  const {
-    title,
-    description,
-    question,
-    category,
-    startDate,
-    endDate,
-    Surveyor_email,
-    Surveyor_image,
-    Surveyor_name,
-  } = survey;
-  console.log(survey);
+  const handleSurvey = (event) => {
+    event.preventDefault();
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
+    const Surveyor_email = user.email;
+    const Surveyor_name = user.displayName;
+    const Surveyor_image = user.photoURL;
 
-    const form = e.target;
+    const form = event.target;
     const title = form.title.value;
     const category = form.category_name.value;
     const description = form.description.value;
     const question = form.question.value;
+
+    const publishDate = new Date().toISOString().split("T")[0];
     const startDate = form.start.value;
     const endDate = form.end.value;
-    const publishDate = new Date().toISOString().split("T")[0];
 
-    const updateSurvey = {
+    const addNewSurvey = {
       Surveyor_email,
       Surveyor_name,
       Surveyor_image,
@@ -54,30 +37,43 @@ const EditSurvey = () => {
       startDate,
       endDate,
     };
-    const update = await axiosSecure.put(`/editSurvey/${id}`, updateSurvey);
-    console.log(update.data);
-    if (update.data.modifiedCount > 0) {
-      Swal.fire({
-        title: "Success!",
-        text: "Updated Successfully",
-        icon: "success",
-        confirmButtonText: "Cool",
+    // console.log(addNewSurvey);
+
+    const url = "http://localhost:5000/addSurvey";
+    // send data to the server
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(addNewSurvey),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Created survey successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          Navigate("/surveys");
+        }
       });
-      navigate(-1);
-    }
   };
 
-  if (isLoading) return <LoadingSpinner />;
   return (
     <div>
       <Helmet>
-        <title>InsightNexus | Edit Survey</title>
+        <title>InsightNexus | Create Survey</title>
       </Helmet>
       <div className="bg-transparent border border-black shadow-2xl p-4 md:w-2/3 mx-auto rounded-md my-16">
         <h2 className="text-3xl text-center font-semibold my-4">
-          Update Survey
+          Create Survey
         </h2>
-        <form onSubmit={handleUpdate}>
+        <form onSubmit={handleSurvey}>
           {/* survey title */}
 
           <div className="form-control w-full">
@@ -86,7 +82,6 @@ const EditSurvey = () => {
             </label>
             <label className="input-group">
               <input
-                defaultValue={title}
                 type="text"
                 name="title"
                 placeholder="title"
@@ -104,7 +99,6 @@ const EditSurvey = () => {
               </span>
             </label>
             <textarea
-              defaultValue={description}
               className="rounded-lg pl-3 pt-2 border border-black bg-base-200"
               name="description"
               placeholder="short description"
@@ -122,7 +116,6 @@ const EditSurvey = () => {
             </label>
             <label className="input-group">
               <input
-                defaultValue={question}
                 type="text"
                 name="question"
                 placeholder="question"
@@ -142,7 +135,6 @@ const EditSurvey = () => {
                 </span>
               </label>
               <select
-                defaultValue={category}
                 name="category_name"
                 className="rounded-md border border-black"
               >
@@ -171,7 +163,6 @@ const EditSurvey = () => {
               </label>
               <label className="input-group">
                 <input
-                  defaultValue={startDate}
                   type="date"
                   name="start"
                   className="input input-bordered border-black w-full"
@@ -190,7 +181,6 @@ const EditSurvey = () => {
               </label>
               <label className="input-group">
                 <input
-                  defaultValue={endDate}
                   type="date"
                   name="end"
                   className="input input-bordered border-black w-full"
@@ -203,7 +193,7 @@ const EditSurvey = () => {
           <div className="flex justify-center my-4">
             <input
               type="submit"
-              value="Update"
+              value="Create"
               className="btn btn-md border text-white bg-black text-lg font-bold"
             />
           </div>
@@ -213,4 +203,4 @@ const EditSurvey = () => {
   );
 };
 
-export default EditSurvey;
+export default CreateSurvey;

@@ -1,15 +1,11 @@
 import PropTypes from "prop-types";
 import { FaUser, FaCalendarAlt, FaPoll, FaFlag } from "react-icons/fa";
 import Swal from "sweetalert2";
-
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-// import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const SurveyCard = ({ item }) => {
-  const axiosSecure = useAxiosPublic();
+  // const axiosSecure = useAxiosPublic();
   const { user } = useAuth();
   const navigate = useNavigate();
   const {
@@ -21,17 +17,16 @@ const SurveyCard = ({ item }) => {
     Surveyor_email,
     endDate,
   } = item;
+  // get vote by id
+  // const { data: vote = {}, isLoading } = useQuery({
+  //   queryKey: ["vote"],
+  //   queryFn: async () => {
+  //     const { data } = await axiosSecure.get(`/vote/survey/${_id}`);
+  //     return data;
+  //   },
+  // });
+  // console.log(vote?.length);
 
-  const { data: vote = {}, isLoading } = useQuery({
-    queryKey: ["vote"],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get(`/vote/survey/${_id}`);
-      return data;
-    },
-  });
-  console.log(vote?.length);
-  console.log(_id);
-  // console.log(item);
   // handle report
   const handleReport = (event) => {
     event.preventDefault();
@@ -98,7 +93,7 @@ const SurveyCard = ({ item }) => {
 
   // Get dynamic background color based on category
   const cardColor = getCardColor(category);
-  if (isLoading) return "wait";
+
   return (
     <div
       className={`rounded-lg border w-[250px] shadow-md overflow-hidden ${cardColor} flex flex-col justify-between`}
@@ -129,7 +124,7 @@ const SurveyCard = ({ item }) => {
 
           <div className="flex items-center mt-4">
             <FaPoll className="mr-2" />
-            <span className="text-sm">{vote?.length} votes</span>
+            <span className="text-sm"> votes</span>
           </div>
           <div className="flex justify-end">
             <span className="lg:tooltip" data-tip="Report">

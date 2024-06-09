@@ -8,7 +8,7 @@ import UseRole from "../../Hooks/useRole";
 const Profile = () => {
   const { user } = useAuth();
   const [role] = UseRole();
-
+  const id = "6663f6543b701a9a8755aad0";
   // console.log(user);
   return (
     <div className="flex justify-center py-4 rounded-t-md ">
@@ -41,7 +41,7 @@ const Profile = () => {
             </p>
           </div>
           <div className="flex justify-center pt-2 space-x-4 align-center">
-            <Link to={"edit-user"}>
+            <Link to={`edit-user/${id}`}>
               <FaEdit className="absolute top-2 right-2 text-2xl hover:text-blue-600" />
             </Link>
             <a

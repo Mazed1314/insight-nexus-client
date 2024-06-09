@@ -1,31 +1,41 @@
 import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import auth from "../../Firebase/Firebase.config";
 import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const EditProfile = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
+
   // console.log(user);
+
   const handleUpdate = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photoURL = e.target.photoURL.value;
+    const updateUser = { name, photoURL };
     updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
     })
       .then(() => {
         e.target.reset();
-        Swal.fire({
-          title: "Success!",
-          text: "Updated Successfully",
-          icon: "success",
-          confirmButtonText: "Cool",
-        });
+        const update = axiosSecure.put(`/edit/${id}`, updateUser);
+        // console.log(update.data);
+        if (update) {
+          Swal.fire({
+            title: "Success!",
+            text: "Updated Successfully",
+            icon: "success",
+            confirmButtonText: "Cool",
+          });
+        }
         navigate(-1);
       })
       .catch((error) => {
