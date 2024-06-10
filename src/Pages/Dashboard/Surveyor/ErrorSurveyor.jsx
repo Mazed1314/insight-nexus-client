@@ -30,7 +30,7 @@ const ErrorSurveyor = () => {
             Current user is not a surveyor !
           </h1>
           <button
-            className="bg-pink-700 my-8 text-white hover:bg-pink-600 p-2 border px-2 rounded-lg"
+            className="bg-teal-700 my-8 text-white hover:bg-teal-600 p-2 border px-2 rounded-lg"
             onClick={() => navigate("/pricing")}
           >
             Become a surveyor

@@ -22,6 +22,8 @@ import EditSurvey from "../Pages/Dashboard/Surveyor/EditSurvey";
 import ManageSurveyorSurvey from "../Pages/Dashboard/Surveyor/ManageSurveyorSurvey";
 import ViewDetails from "../Pages/Dashboard/Surveyor/ViewDetails";
 import ManageComent from "../Pages/Dashboard/Pro/ManageComent";
+import ParticipateSurvey from "../Pages/Dashboard/User/ParticipateSurvey";
+import Contact from "../Pages/Contact";
 // import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/pricing",
         element: <Pricing></Pricing>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
       {
         path: "/create-survey",
@@ -105,7 +111,11 @@ const router = createBrowserRouter([
       // --------------------------------------------------------------
       {
         path: "user/surveys",
-        element: <PrivateRoute>{/* Participate in surveys */}</PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ParticipateSurvey></ParticipateSurvey>
+          </PrivateRoute>
+        ),
       },
       {
         path: "user/my-reports",

@@ -128,15 +128,32 @@ const ViewDetails = () => {
       </div>
 
       <div className="w-full my-2">
-        <h2 className="text-center underline text-xl font-semibold">Votes</h2>
-        <div className="flex justify-center">
-          <div className="stats shadow">
-            <div className="stat">
-              <div className="stat-title">Total vote</div>
-              <div className="stat-value text-center">{vote?.length}</div>
-            </div>
-          </div>
-        </div>
+        <h2 className="text-center underline text-xl font-semibold">
+          Votes : {vote?.length}
+        </h2>
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr className="bg-gray-500 text-white">
+              <th>Sl</th>
+              <th>User Email</th>
+              <th>User Name </th>
+              <th>Vote</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vote.map((item, index) => (
+              <>
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>{item.currentUserEmail}</td>
+                  <td>{item.currentUserName}</td>
+                  <td>{item.vote}</td>
+                </tr>
+              </>
+            ))}
+          </tbody>
+        </table>
       </div>
       <div className="w-full my-2">
         {reports.length < 1 ? (

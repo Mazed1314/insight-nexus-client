@@ -36,7 +36,7 @@ const MyReport = () => {
                   <p className="my-2">{item.question}</p>
                   <p>{item.report}</p>
                   <NavLink
-                    to={`/view-details/${item._id}`}
+                    to={`/view-details/${item.survey_id}`}
                     className={`btn btn-sm my-4 text-white bg-gray-500 shadow px-4 py-2 rounded `}
                   >
                     Details

@@ -96,13 +96,13 @@ const DashboardLayout = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/">
+                <NavLink to="/surveys">
                   <FaSearch></FaSearch>
-                  Menu
+                  Surveys
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/">
+                <NavLink to="/contact">
                   <FaEnvelope></FaEnvelope>
                   Contact
                 </NavLink>
