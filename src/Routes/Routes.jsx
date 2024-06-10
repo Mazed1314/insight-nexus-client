@@ -142,7 +142,9 @@ const router = createBrowserRouter([
         path: "surveyor/create",
         element: (
           <PrivateRoute>
-            <CreateSurvey></CreateSurvey>
+            <SurveyorRoute>
+              <CreateSurvey></CreateSurvey>
+            </SurveyorRoute>
           </PrivateRoute>
         ),
       },
@@ -150,7 +152,9 @@ const router = createBrowserRouter([
         path: "surveyor/manage",
         element: (
           <PrivateRoute>
-            <ManageSurveyorSurvey></ManageSurveyorSurvey>
+            <SurveyorRoute>
+              <ManageSurveyorSurvey></ManageSurveyorSurvey>
+            </SurveyorRoute>
           </PrivateRoute>
         ),
       },
@@ -204,7 +208,9 @@ const router = createBrowserRouter([
         path: "admin/payments",
         element: (
           <PrivateRoute>
-            <Payments></Payments>
+            <AdminRoute>
+              <Payments></Payments>
+            </AdminRoute>
           </PrivateRoute>
         ),
       },

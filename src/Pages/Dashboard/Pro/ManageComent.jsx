@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const ManageComent = () => {
   const axiosSecure = useAxiosSecure();
@@ -50,6 +51,9 @@ const ManageComent = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Comments</title>
+      </Helmet>
       {comments.length < 1 && (
         <div className="container flex items-center min-h-screen px-6 py-12 mx-auto">
           <div className="flex flex-col items-center max-w-sm mx-auto text-center">

@@ -63,6 +63,7 @@ const SurveyDetails = () => {
   const addNewVote = {
     Surveyor_email,
     currentUserEmail,
+    currentUserName,
     vote,
     currentUserImage,
     survey_id,
