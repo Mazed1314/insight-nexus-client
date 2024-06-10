@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
-// import { FiEdit } from "react-icons/fi";
 import { MdOutlineDelete } from "react-icons/md";
 import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -17,12 +16,12 @@ const ManageUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/users`);
+      const { data } = await axiosSecure.get(`/users`);
       return data;
     },
   });
 
-  const handleMakeAdmin = (id, name) => {
+  const handleMakeAdmin = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "Can you change the user role?",
@@ -40,7 +39,88 @@ const ManageUsers = () => {
             Swal.fire({
               position: "top-end",
               icon: "success",
-              title: `${name} is an Admin Now!`,
+              title: ` is an Admin Now!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      }
+    });
+  };
+  const handleMakeSurveyor = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Can you change the user role?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00B03B",
+      cancelButtonColor: "#FF6161",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/surveyor/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: ` is an Surveyor Now!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      }
+    });
+  };
+  const handleMakePro = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Can you change the user role?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00B03B",
+      cancelButtonColor: "#FF6161",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/pro/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `is an Premium User Now!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      }
+    });
+  };
+  const handleMakeUser = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Can you change the user role?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00B03B",
+      cancelButtonColor: "#FF6161",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/user/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `the user is an User Now!`,
               showConfirmButton: false,
               timer: 1500,
             });
@@ -114,33 +194,58 @@ const ManageUsers = () => {
                 <span className="flex gap-1">
                   {user.role !== "admin" && (
                     <>
-                      {/* <select
-                        onClick={() => handleMakeAdmin()}
-                        name="category_name"
-                        className="shadow menu dropdown-content z-[1] bg-pink-100 rounded-box w-20"
-                      >
-                        <option disabled selected>
-                          Edit
-                        </option>
-                        <option value="Health">Make Admin</option>
-                        <option value="Travel">Make Surveyor</option>
-                        <option value="Travel">Make Pro</option>
-                        <option value="Travel">Make User</option>
-                      </select> */}
+                      <div className="flex items-center gap-2">
+                        <div className="dropdown dropdown-hover">
+                          <summary className="border border-black text-black bg-white btn btn-xs">
+                            Change user role
+                          </summary>
+                          <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box ">
+                            <NavLink
+                              onClick={() => handleMakeAdmin(user._id)}
+                              className={
+                                "hover:bg-gray-600 hover:text-white p-1 rounded-md"
+                              }
+                            >
+                              {" "}
+                              Make Admin
+                            </NavLink>
 
-                      <NavLink
-                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
-                        onClick={() => handleMakeAdmin(user._id, user.name)}
-                      >
-                        make admin
-                      </NavLink>
+                            <NavLink
+                              onClick={() => handleMakeSurveyor(user._id)}
+                              className={
+                                "hover:bg-gray-600 hover:text-white p-1 rounded-md"
+                              }
+                            >
+                              Make Surveyor
+                            </NavLink>
 
-                      <NavLink
-                        onClick={() => handleDeleteUser(user._id)}
-                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
-                      >
-                        <MdOutlineDelete className="text-xl" />
-                      </NavLink>
+                            <NavLink
+                              onClick={() => handleMakePro(user._id)}
+                              className={
+                                "hover:bg-gray-600 hover:text-white p-1 rounded-md"
+                              }
+                            >
+                              Make Pro
+                            </NavLink>
+
+                            <NavLink
+                              onClick={() => handleMakeUser(user._id)}
+                              className={
+                                "hover:bg-gray-600 hover:text-white p-1 rounded-md"
+                              }
+                            >
+                              Make User
+                            </NavLink>
+                          </ul>
+                        </div>
+
+                        <NavLink
+                          onClick={() => handleDeleteUser(user._id)}
+                          className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                        >
+                          <MdOutlineDelete className="text-xl" />
+                        </NavLink>
+                      </div>
                     </>
                   )}
                 </span>

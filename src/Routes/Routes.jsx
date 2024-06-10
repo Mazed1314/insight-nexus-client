@@ -24,6 +24,7 @@ import ViewDetails from "../Pages/Dashboard/Surveyor/ViewDetails";
 import ManageComent from "../Pages/Dashboard/Pro/ManageComent";
 import ParticipateSurvey from "../Pages/Dashboard/User/ParticipateSurvey";
 import Contact from "../Pages/Contact";
+import Payments from "../Pages/Dashboard/Admin/Payments";
 // import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
@@ -203,7 +204,7 @@ const router = createBrowserRouter([
         path: "admin/payments",
         element: (
           <PrivateRoute>
-            {/* View all payments and survey responses.  */}
+            <Payments></Payments>
           </PrivateRoute>
         ),
       },
