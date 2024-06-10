@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
-import { FaUser, FaCalendarAlt, FaPoll, FaFlag } from "react-icons/fa";
+import { FaUser, FaCalendarAlt, FaFlag } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const SurveyCard = ({ item }) => {
-  // const axiosSecure = useAxiosPublic();
   const { user } = useAuth();
   const navigate = useNavigate();
   const {
@@ -17,15 +16,6 @@ const SurveyCard = ({ item }) => {
     Surveyor_email,
     endDate,
   } = item;
-  // get vote by id
-  // const { data: vote = {}, isLoading } = useQuery({
-  //   queryKey: ["vote"],
-  //   queryFn: async () => {
-  //     const { data } = await axiosSecure.get(`/vote/survey/${_id}`);
-  //     return data;
-  //   },
-  // });
-  // console.log(vote?.length);
 
   // handle report
   const handleReport = (event) => {
@@ -122,10 +112,6 @@ const SurveyCard = ({ item }) => {
             <span className="text-sm">End Survey : {endDate}</span>
           </div>
 
-          <div className="flex items-center mt-4">
-            <FaPoll className="mr-2" />
-            <span className="text-sm"> votes</span>
-          </div>
           <div className="flex justify-end">
             <span className="lg:tooltip" data-tip="Report">
               <button
