@@ -26,7 +26,7 @@ const MyReport = () => {
           <h2 className="text-center my-4 font-semibold text-xl">
             You given report following surveys
           </h2>
-          {reports.map((item, index) => (
+          {reports?.map((item, index) => (
             <>
               <div
                 key={index}

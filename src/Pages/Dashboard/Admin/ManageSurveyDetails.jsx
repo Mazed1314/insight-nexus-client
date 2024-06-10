@@ -10,7 +10,7 @@ const ManageSurveyDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: reports = {} } = useQuery({
+  const { data: reports = [] } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/reports/surveys/${id}`);
@@ -20,7 +20,7 @@ const ManageSurveyDetails = () => {
   console.log(reports.length);
 
   // get vote
-  const { data: vote = {}, isLoading } = useQuery({
+  const { data: vote = [], isLoading } = useQuery({
     queryKey: ["vote"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/vote/survey/${id}`);
@@ -29,7 +29,7 @@ const ManageSurveyDetails = () => {
   });
   // console.log(vote?.length);
 
-  const { data: survey = {} } = useQuery({
+  const { data: survey = [] } = useQuery({
     queryKey: ["survey", id],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/surveys/${id}`);
@@ -150,7 +150,7 @@ const ManageSurveyDetails = () => {
               This Survey has following reports ({reports.length})
             </h2>
 
-            {reports.map((item, index) => (
+            {reports?.map((item, index) => (
               <>
                 <div
                   key={index}

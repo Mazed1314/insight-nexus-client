@@ -1,13 +1,13 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
 import { MdDateRange } from "react-icons/md";
 import UseRole from "../Hooks/useRole";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Comment = ({ info }) => {
-  const [item, setItem] = useState([]);
   const [role] = UseRole();
+  const axiosPublic = useAxiosPublic();
 
   const {
     Surveyor_email,
@@ -18,13 +18,12 @@ const Comment = ({ info }) => {
   } = info;
   const survey_id = _id;
 
-  useEffect(() => {
-    axios
-      // .get(`http://localhost:5000/com/${survey_id}`)
-      .get(`https://insight-nexus-server.vercel.app/com/${survey_id}`)
-      .then((res) => {
-        setItem(res.data);
-      });
+  const { data: comment = [] } = useQuery({
+    queryKey: ["comment"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/com/${survey_id}`);
+      return res.data;
+    },
   });
 
   const handleSubmit = (e) => {
@@ -78,7 +77,7 @@ const Comment = ({ info }) => {
         <div className="max-w-2xl mx-auto px-4">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg lg:text-2xl font-bold">
-              Comment ({item.length})
+              Comment ({comment.length})
             </h2>
           </div>
           {Surveyor_email != currentUserEmail && role == "pro" && (
@@ -104,7 +103,7 @@ const Comment = ({ info }) => {
             </>
           )}
 
-          {item?.map((card, index) => (
+          {comment?.map((card, index) => (
             <>
               <article key={index} className="p-6 bg-base-200 rounded-lg mb-3">
                 <footer className="flex justify-between items-center mb-2">

@@ -87,7 +87,7 @@ const ParticipateSurvey = () => {
             Survey your participation : {votes.length}
           </h2>
           <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
-            {votes.map((item) => (
+            {votes?.map((item) => (
               <>
                 <ViewPrticipateSurvey
                   key={item._id}

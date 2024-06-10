@@ -142,7 +142,7 @@ const ViewDetails = () => {
             </tr>
           </thead>
           <tbody>
-            {vote.map((item, index) => (
+            {vote?.map((item, index) => (
               <>
                 <tr key={index}>
                   <th>{index + 1}</th>

@@ -4,7 +4,7 @@ import UseRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
   const role = UseRole();
-  console.log(role[0]);
+  // console.log(role);
 
   return (
     <div className="min-h-screen md:flex">

@@ -116,7 +116,7 @@ const ManageComent = () => {
           <h2 className="text-center my-4 font-semibold text-xl">
             You recent comment
           </h2>
-          {comments.map((item, index) => (
+          {comments?.map((item, index) => (
             <>
               <div
                 key={index}

@@ -46,7 +46,7 @@ const ManageSurvey = () => {
               </tr>
             </thead>
             <tbody>
-              {survey.map((item, index) => (
+              {survey?.map((item, index) => (
                 <>
                   <tr key={index} className="hover:bg-gray-50 border-b py-1">
                     <td className="px-3 text-lg font-medium text-center">
