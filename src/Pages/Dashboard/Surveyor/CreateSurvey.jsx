@@ -39,7 +39,7 @@ const CreateSurvey = () => {
     };
     // console.log(addNewSurvey);
 
-    const url = "http://localhost:5000/addSurvey";
+    const url = "https://insight-nexus-server.vercel.app/addSurvey";
     // send data to the server
     fetch(url, {
       method: "POST",
