@@ -2,45 +2,89 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { NavLink } from "react-router-dom";
+import { MdOutlineDelete } from "react-icons/md";
+import Swal from "sweetalert2";
+import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
 
 const MyReport = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   //   my - report;
-  const { data: reports = {} } = useQuery({
+  const {
+    data: reports = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/reports/email/${user.email}`);
       return data;
     },
   });
-  // console.log(user.email);
-  // console.log(reports);
+
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this report!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://insight-nexus-server.vercel.app/reports/${id}`, {
+          // fetch(`http://localhost:5000/reports/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              refetch();
+              Swal.fire("Deleted!", "successfully deleted ", "success");
+            }
+          });
+      }
+    });
+  };
+
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div>
       {reports.length < 1 && (
-        <h2 className="text-center my-2">You dont give report any survey</h2>
+        <h2 className="mt-3 text-2xl font-semibold text-gray-800 text-center  md:text-3xl">
+          You dont give report any survey
+        </h2>
       )}
       {reports.length > 0 && (
         <>
           <h2 className="text-center my-4 font-semibold text-xl">
-            You given report following surveys
+            Your given survey reports are below
           </h2>
           {reports?.map((item, index) => (
             <>
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-md p-6 my-2"
-              >
-                <div className="my-4 text-center">
-                  <p className="my-2">{item.question}</p>
-                  <p>{item.report}</p>
-                  <NavLink
-                    to={`/view-details/${item.survey_id}`}
-                    className={`btn btn-sm my-4 text-white bg-gray-500 shadow px-4 py-2 rounded `}
-                  >
-                    Details
-                  </NavLink>
+              <div key={index} className="p-6 my-2">
+                <div className="card w-sm bg-base-100 border shadow-md">
+                  <div className="card-body">
+                    <h2 className="card-title">Your Report</h2>
+                    <p>{item.report}</p>
+                    <div className="card-actions justify-end">
+                      <NavLink
+                        to={`/view-details/${item.survey_id}`}
+                        className={`btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white`}
+                      >
+                        Go to the survey
+                      </NavLink>
+                      <NavLink
+                        onClick={() => handleDelete(item._id)}
+                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                      >
+                        <MdOutlineDelete className="text-xl" />
+                      </NavLink>
+                    </div>
+                  </div>
                 </div>
               </div>
             </>

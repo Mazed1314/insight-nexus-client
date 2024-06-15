@@ -5,13 +5,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdOutlineDelete } from "react-icons/md";
 import { Helmet } from "react-helmet";
+import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
 
 const ManageComent = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const { data: comments = [] } = useQuery({
+  const { data: comments = [], isLoading } = useQuery({
     queryKey: ["com"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/com/email/${user.email}`);
@@ -46,7 +47,7 @@ const ManageComent = () => {
       }
     });
   };
-
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div>
       <Helmet>
@@ -130,7 +131,7 @@ const ManageComent = () => {
                         to={`/view-details/${item.survey_id}`}
                         className={`btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white`}
                       >
-                        Go to survey
+                        Go to the survey
                       </NavLink>
                       <NavLink
                         onClick={() => handleDelete(item._id)}
