@@ -4,7 +4,6 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { MdOutlineDelete } from "react-icons/md";
-import { FaRegEye } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 
 const ManageComent = () => {
@@ -19,7 +18,6 @@ const ManageComent = () => {
       return data;
     },
   });
-  console.log(comments);
 
   const handleDelete = (id) => {
     console.log(id);
@@ -122,26 +120,25 @@ const ManageComent = () => {
           </h2>
           {comments?.map((item, index) => (
             <>
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-md p-6 my-2"
-              >
-                <div className="my-4 ">
-                  <p className="my-2 text-center">{item.comment}</p>
-                  <div className="flex gap-5 justify-center">
-                    <NavLink
-                      to={`/view-details/${item.survey_id}`}
-                      className={`btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white`}
-                    >
-                      <FaRegEye className="text-lg" />
-                    </NavLink>
-
-                    <NavLink
-                      onClick={() => handleDelete(item._id)}
-                      className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
-                    >
-                      <MdOutlineDelete className="text-xl" />
-                    </NavLink>
+              <div key={index} className="p-6 my-2">
+                <div className="card w-sm bg-base-100 border shadow-md">
+                  <div className="card-body">
+                    <h2 className="card-title">Your Comment</h2>
+                    <p>{item.comment}</p>
+                    <div className="card-actions justify-end">
+                      <NavLink
+                        to={`/view-details/${item.survey_id}`}
+                        className={`btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white`}
+                      >
+                        Go to survey
+                      </NavLink>
+                      <NavLink
+                        onClick={() => handleDelete(item._id)}
+                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                      >
+                        <MdOutlineDelete className="text-xl" />
+                      </NavLink>
+                    </div>
                   </div>
                 </div>
               </div>
