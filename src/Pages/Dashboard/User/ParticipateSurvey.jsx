@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import ViewPrticipateSurvey from "./ViewPrticipateSurvey";
 import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
+import { NavLink } from "react-router-dom";
 
 const ParticipateSurvey = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,7 +15,7 @@ const ParticipateSurvey = () => {
       return data;
     },
   });
-  console.log(votes);
+  // console.log(votes);
   if (isPending) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
@@ -53,10 +53,45 @@ const ParticipateSurvey = () => {
           <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
             {votes.map((item) => (
               <>
-                <ViewPrticipateSurvey
-                  key={item._id}
-                  item={item}
-                ></ViewPrticipateSurvey>
+                <div
+                  className={`rounded-lg border w-[250px] shadow-md overflow-hidden flex flex-col justify-between`}
+                >
+                  <div className="p-4">
+                    {/* header */}
+                    <div className="">
+                      <h3>
+                        You voted{" "}
+                        <span className="text-lg font-semibold ">
+                          {item.Surveyor_name}
+                        </span>
+                        's Survey on{" "}
+                        <span className="text-sm font-semibold">
+                          {item.voteDate}
+                        </span>
+                      </h3>
+                      <div className="divider my-2"></div>
+                    </div>
+                    {/* body */}
+                    <div className="">
+                      <p className="my-2 font-medium">{item.question}</p>
+
+                      <p>
+                        your vote :{" "}
+                        <span className="font-semibold">{item.vote}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* bottom */}
+                  <div className="bg-gray-200 py-3 px-6 flex gap-3 justify-center items-center">
+                    <NavLink
+                      to={`/view-details/${item.survey_id}`}
+                      className={` text-black shadow px-4 bg-gray-100 hover:bg-slate-300 py-2 border rounded `}
+                    >
+                      Go to the survey
+                    </NavLink>
+                  </div>
+                </div>
               </>
             ))}
           </div>

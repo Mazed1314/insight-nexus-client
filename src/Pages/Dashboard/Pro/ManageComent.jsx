@@ -20,6 +20,8 @@ const ManageComent = () => {
     },
   });
 
+  console.log(comments);
+
   const handleDelete = (id) => {
     console.log(id);
     Swal.fire({
@@ -117,13 +119,32 @@ const ManageComent = () => {
       {comments.length > 0 && (
         <>
           <h2 className="text-center my-4 font-semibold text-xl">
-            You recent comment
+            Your recent comment
           </h2>
-          {comments?.map((item, index) => (
-            <>
-              <div key={index} className="p-6 my-2">
-                <div className="card w-sm bg-base-100 border shadow-md">
+          <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
+            {comments?.map((item, index) => (
+              <>
+                <div
+                  key={index}
+                  className="card w-sm bg-base-100 border shadow-md"
+                >
                   <div className="card-body">
+                    {/* header */}
+                    <div className="">
+                      <h3>
+                        You comment{" "}
+                        <span className="text-lg font-semibold ">
+                          {item.Surveyor_name}
+                        </span>
+                        's Survey on{" "}
+                        <span className="text-sm font-semibold">
+                          {item.commentTime}
+                        </span>
+                      </h3>
+                      <div className="divider my-2"></div>
+                    </div>
+                    <p className="mb-2 text-lg ">{item.question}</p>
+
                     <h2 className="card-title">Your Comment</h2>
                     <p>{item.comment}</p>
                     <div className="card-actions justify-end">
@@ -142,9 +163,9 @@ const ManageComent = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
-          ))}
+              </>
+            ))}
+          </div>
         </>
       )}
     </div>

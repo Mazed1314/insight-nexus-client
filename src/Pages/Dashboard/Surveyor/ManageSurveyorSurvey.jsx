@@ -5,6 +5,7 @@ import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
+import { FaEdit } from "react-icons/fa";
 
 const ManageSurveyorSurvey = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,7 @@ const ManageSurveyorSurvey = () => {
     },
   });
 
-  console.log(surveys);
+  // console.log(surveys);
   const today = new Date().toISOString().split("T")[0];
 
   if (loading) return <LoadingSpinner />;
@@ -79,6 +80,19 @@ const ManageSurveyorSurvey = () => {
                       >
                         <FaRegEye />
                       </NavLink>
+                      <NavLink
+                        to={`/edit-survey/${item._id}`}
+                        className="btn btn-sm mt-2 text-center rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                      >
+                        <FaEdit className="text-xl " />
+                      </NavLink>
+
+                      {/* <NavLink
+                        onClick={() => handleDelete(id)}
+                        className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
+                      >
+                        <MdOutlineDelete className="text-xl" />
+                      </NavLink> */}
                     </td>
                   </tr>
                 </>

@@ -28,7 +28,7 @@ const EditSurvey = () => {
     Surveyor_image,
     Surveyor_name,
   } = survey;
-  console.log(survey);
+  // console.log(survey);
 
   const handleUpdate = async (e) => {
     e.preventDefault();

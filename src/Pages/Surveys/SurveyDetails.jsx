@@ -76,6 +76,8 @@ const SurveyDetails = () => {
   const survey_id = _id;
   const info = {
     Surveyor_email,
+    Surveyor_name,
+    question,
     currentUserEmail,
     currentUserName,
     currentUserImage,
@@ -89,12 +91,29 @@ const SurveyDetails = () => {
     const report = event.target.report.value;
     const survey_id = _id;
     const surveyor_email = Surveyor_email;
-    const reporter = user.email;
-
-    const getReport = { report, survey_id, reporter, surveyor_email };
+    const reporter = currentUserName;
+    const reporterEmail = currentUserEmail;
+    const reportdate = new Date()
+      .toLocaleString("en", {
+        day: "numeric",
+        month: "short",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: false,
+      })
+      .replace(",", "");
+    const getReport = {
+      report,
+      survey_id,
+      reporter,
+      reporterEmail,
+      Surveyor_name,
+      question,
+      surveyor_email,
+      reportdate,
+    };
     // console.log(getReport);
 
-    // fetch("http://localhost:5000/reports", {
     fetch("https://insight-nexus-server.vercel.app/reports", {
       method: "POST",
       headers: {
@@ -118,13 +137,24 @@ const SurveyDetails = () => {
   };
 
   // handle vote
+  const voteDate = new Date()
+    .toLocaleString("en", {
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: false,
+    })
+    .replace(",", "");
   const addNewVote = {
-    Surveyor_email,
+    survey_id,
+    Surveyor_name,
+    voteDate,
+    question,
     currentUserEmail,
     currentUserName,
-    vote,
     currentUserImage,
-    survey_id,
+    vote,
   };
 
   const handleVoteChange = (e) => {

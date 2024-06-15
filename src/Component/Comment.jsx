@@ -11,6 +11,8 @@ const Comment = ({ info }) => {
 
   const {
     Surveyor_email,
+    Surveyor_name,
+    question,
     currentUserEmail,
     currentUserName,
     currentUserImage,
@@ -44,11 +46,12 @@ const Comment = ({ info }) => {
       currentUserName,
       currentUserImage,
       survey_id,
+      Surveyor_name,
+      question,
       commentTime,
     };
 
     const url = "https://insight-nexus-server.vercel.app/com";
-    // const url = "http://localhost:5000/com";
     // send data to the server
     fetch(url, {
       method: "POST",

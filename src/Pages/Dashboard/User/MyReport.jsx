@@ -22,6 +22,8 @@ const MyReport = () => {
     },
   });
 
+  // console.log(reports);
+
   const handleDelete = (id) => {
     console.log(id);
     Swal.fire({
@@ -35,7 +37,6 @@ const MyReport = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`https://insight-nexus-server.vercel.app/reports/${id}`, {
-          // fetch(`http://localhost:5000/reports/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -63,12 +64,31 @@ const MyReport = () => {
           <h2 className="text-center my-4 font-semibold text-xl">
             Your given survey reports are below
           </h2>
-          {reports?.map((item, index) => (
-            <>
-              <div key={index} className="p-6 my-2">
-                <div className="card w-sm bg-base-100 border shadow-md">
+          <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
+            {reports?.map((item, index) => (
+              <>
+                <div
+                  key={index}
+                  className="card w-sm bg-base-100 border shadow-md"
+                >
                   <div className="card-body">
-                    <h2 className="card-title">Your Report</h2>
+                    {/* header */}
+                    <div className="">
+                      <h3>
+                        You report{" "}
+                        <span className="text-lg font-semibold ">
+                          {item.Surveyor_name}
+                        </span>
+                        's Survey on{" "}
+                        <span className="text-sm font-semibold">
+                          {item.reportdate}
+                        </span>
+                      </h3>
+                      <div className="divider my-2"></div>
+                    </div>
+                    <p className="mb-2 text-lg ">{item.question}</p>
+
+                    <h2 className="card-title">Your report</h2>
                     <p>{item.report}</p>
                     <div className="card-actions justify-end">
                       <NavLink
@@ -86,9 +106,9 @@ const MyReport = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </>
-          ))}
+              </>
+            ))}
+          </div>
         </>
       )}
     </div>
