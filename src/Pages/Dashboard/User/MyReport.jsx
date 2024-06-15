@@ -15,7 +15,7 @@ const MyReport = () => {
     },
   });
   // console.log(user.email);
-  console.log(reports);
+  // console.log(reports);
   return (
     <div>
       {reports.length < 1 && (

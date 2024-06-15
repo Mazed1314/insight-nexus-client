@@ -8,9 +8,9 @@ const Surveys = () => {
   // console.log(survey);
   return (
     <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
-      {survey?.map((item) => (
+      {survey?.map((item, index) => (
         <>
-          <SurveyCard key={item._id} item={item}></SurveyCard>
+          <SurveyCard key={index} item={item}></SurveyCard>
         </>
       ))}
     </div>

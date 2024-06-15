@@ -18,7 +18,7 @@ const Comment = ({ info }) => {
   } = info;
   const survey_id = _id;
 
-  const { data: comment = [] } = useQuery({
+  const { data: comment = [], refetch } = useQuery({
     queryKey: ["comment"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/com/${survey_id}`);
@@ -61,6 +61,7 @@ const Comment = ({ info }) => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
+          refetch();
           Swal.fire({
             text: "Thank You for comment",
 
