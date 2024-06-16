@@ -17,7 +17,7 @@ const ManageSurveyDetails = () => {
       return data;
     },
   });
-  console.log(reports.length);
+  console.log(reports);
 
   // get vote
   const { data: vote = [], isLoading } = useQuery({
@@ -62,7 +62,6 @@ const ManageSurveyDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`https://insight-nexus-server.vercel.app/survey/${id}`, {
-          // fetch(`http://localhost:5000/survey/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -140,31 +139,39 @@ const ManageSurveyDetails = () => {
         </div>
       </div>
       <div className="w-full my-2">
-        {reports.length < 1 ? (
-          <h2 className="text-center my-2 text-xl font-semibold">
-            This Survey has no report
-          </h2>
-        ) : (
-          <>
-            <h2 className="text-center underline text-xl font-semibold">
-              This Survey has following reports ({reports.length})
+        <div className="w-full my-2">
+          {reports.length < 1 ? (
+            <h2 className="text-center my-2 text-xl font-semibold">
+              This Survey has no report
             </h2>
+          ) : (
+            <>
+              <h2 className="text-center underline text-xl font-semibold">
+                This Survey has following reports ({reports.length})
+              </h2>
 
-            {reports?.map((item, index) => (
-              <>
-                <div
-                  key={index}
-                  className="bg-white rounded-lg shadow-lg p-6 my-2"
-                >
-                  <h3 className="text-xl font-semibold mb-2">
-                    {item.reporter}
-                  </h3>
-                  <p>{item.report}</p>
-                </div>
-              </>
-            ))}
-          </>
-        )}
+              {reports.map((item, index) => (
+                <>
+                  <div
+                    key={index}
+                    className="bg-white rounded-lg border shadow p-6 my-2"
+                  >
+                    <span className="text-lg font-semibold">
+                      {item.reporter}
+                    </span>{" "}
+                    report this survey on
+                    <span className="font-semibold"> {item.reportdate}</span>
+                    <h2 className="my-2 font-semibold">{item.question}</h2>
+                    <h3 className="text-lg font-semibold mb-2">
+                      Reported text :{" "}
+                    </h3>
+                    <p className="text-gray-600">{item.report}</p>
+                  </div>
+                </>
+              ))}
+            </>
+          )}
+        </div>
       </div>
 
       <div className="flex justify-center my-4">

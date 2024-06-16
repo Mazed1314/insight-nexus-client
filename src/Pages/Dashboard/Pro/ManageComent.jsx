@@ -35,7 +35,6 @@ const ManageComent = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`https://insight-nexus-server.vercel.app/survey/${id}`, {
-          // fetch(`http://localhost:5000/survey/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

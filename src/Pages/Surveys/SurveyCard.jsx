@@ -36,29 +36,29 @@ const SurveyCard = ({ item }) => {
 
   const getBgColor = (category) => {
     if (category === "Health") {
-      return "bg-blue-200";
+      return "hover:bg-blue-200";
     } else if (category === "Education") {
-      return "bg-fuchsia-300";
+      return "hover:bg-fuchsia-300";
     } else if (category === "Tech") {
-      return "bg-violet-300";
+      return "hover:bg-violet-300";
     } else if (category === "Parenting") {
-      return "bg-cyan-200";
+      return "hover:bg-cyan-200";
     } else if (category === "Lifestyle") {
-      return "bg-lime-200 ";
+      return "hover:bg-lime-200 ";
     } else if (category === "Travel") {
-      return "bg-red-200 ";
+      return "hover:bg-red-200 ";
     } else if (category === "Fashion") {
-      return "bg-yellow-200 ";
+      return "hover:bg-yellow-200 ";
     } else if (category === "Food") {
-      return "bg-green-300 ";
+      return "hover:bg-green-300 ";
     } else if (category === "Finance") {
-      return "bg-blue-300 ";
+      return "hover:bg-blue-300 ";
     } else if (category === "Sports") {
-      return "bg-gray-400 ";
+      return "hover:bg-gray-400 ";
     } else if (category === "Entertainment") {
-      return "bg-orange-200 ";
+      return "hover:bg-orange-200 ";
     } else {
-      return "bg-gray-100 ";
+      return "hover:bg-gray-100 ";
     }
   };
 
@@ -100,7 +100,7 @@ const SurveyCard = ({ item }) => {
       <div className="bg-gray-200 py-3 px-6 flex gap-3 justify-center items-center">
         <NavLink
           to={`/view-details/${_id}`}
-          className={` text-black shadow px-4 py-2 hover:${bgColor} rounded `}
+          className={` text-black shadow px-4 py-2 ${bgColor} rounded `}
         >
           Details
         </NavLink>

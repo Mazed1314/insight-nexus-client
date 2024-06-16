@@ -32,8 +32,7 @@ const ViewDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // fetch(`https://insight-nexus-server.vercel.app/survey/${id}`, {
-        fetch(`http://localhost:5000/survey/${id}`, {
+        fetch(`https://insight-nexus-server.vercel.app/survey/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
