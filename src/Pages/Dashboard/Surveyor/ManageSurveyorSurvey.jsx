@@ -11,7 +11,7 @@ const ManageSurveyorSurvey = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { data: surveys = [], loading } = useQuery({
+  const { data: surveys = [], isLoading } = useQuery({
     queryKey: ["surveys"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/surveys/email/${user.email}`);
@@ -22,7 +22,7 @@ const ManageSurveyorSurvey = () => {
   // console.log(surveys);
   const today = new Date().toISOString().split("T")[0];
 
-  if (loading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div>
       <Helmet>

@@ -5,13 +5,14 @@ import LoadingSpinner from "../../../Component/Shared/LoadingSpinner";
 import { MdOutlineDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import { FaEdit } from "react-icons/fa";
+import SurveyorPiechart from "./SurveyorPiechart";
 
 const ViewDetails = () => {
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const navigate = useNavigate();
   // get vote
-  const { data: vote = {}, isLoading } = useQuery({
+  const { data: vote = [], isLoading } = useQuery({
     queryKey: ["vote"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/vote/survey/${id}`);
@@ -74,31 +75,61 @@ const ViewDetails = () => {
         </div>
       </div>
 
-      <div className="w-full my-2">
-        <table className="table my-2">
-          {/* head */}
-          <thead>
-            <tr className="bg-gray-500 text-white">
-              <th>Sl</th>
-              <th>User Email</th>
-              <th>User Name </th>
-              <th>Vote</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vote?.map((item, index) => (
-              <>
-                <tr key={index}>
-                  <th>{index + 1}</th>
-                  <td>{item.currentUserEmail}</td>
-                  <td>{item.currentUserName}</td>
-                  <td>{item.vote}</td>
+      <div role="tablist" className="tabs tabs-lifted">
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          className="tab"
+          aria-label="Tab 1"
+        />
+        <div
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6 overflow-x-auto"
+        >
+          <div className="w-full my-2">
+            <table className="table my-2">
+              {/* head */}
+              <thead>
+                <tr className="bg-gray-500 text-white">
+                  <th>Sl</th>
+                  <th>User Email</th>
+                  <th>User Name </th>
+                  <th>Vote</th>
                 </tr>
-              </>
-            ))}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {vote?.map((item, index) => (
+                  <>
+                    <tr key={index}>
+                      <th>{index + 1}</th>
+                      <td>{item.currentUserEmail}</td>
+                      <td>{item.currentUserName}</td>
+                      <td>{item.vote}</td>
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <input
+          type="radio"
+          name="my_tabs_2"
+          role="tab"
+          className="tab"
+          aria-label="Tab 2"
+          checked
+        />
+        <div
+          role="tabpanel"
+          className="tab-content bg-base-100 border-base-300 rounded-box p-6"
+        >
+          <SurveyorPiechart vote={vote}></SurveyorPiechart>
+        </div>
       </div>
+
       {/* <div className="w-full my-2">
         {reports.length < 1 ? (
           <h2 className="text-center my-2 text-xl font-semibold">
