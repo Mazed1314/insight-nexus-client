@@ -20,7 +20,7 @@ const Payments = () => {
     },
   });
 
-  const handleDeleteUser = (id) => {
+  const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -80,7 +80,7 @@ const Payments = () => {
               </td>
               <td className="px-3 text-lg font-medium">
                 <NavLink
-                  onClick={() => handleDeleteUser(payment._id)}
+                  onClick={() => handleDelete(payment._id)}
                   className="btn btn-sm mt-2 rounded text-black border-black bg-transparent hover:bg-black hover:text-white"
                 >
                   <MdOutlineDelete className="text-xl" />

@@ -23,7 +23,15 @@ const Surveys = () => {
   if (loading) return <LoadingSpinner />;
   return (
     <div className="">
-      <div className="my-6 flex justify-end w-11/12 mx-auto">
+      <div className="my-6 flex justify-end w-11/12 mx-auto items-end gap-4">
+        {/* <select className="select select-bordered select-xs ">
+          <option disabled selected>
+            Short by vote
+          </option>
+          <option>High to low</option>
+          <option>Low to high</option>
+        </select> */}
+
         <label>
           <div className="label">
             <span className="label-text">Filtered by category</span>
@@ -33,7 +41,7 @@ const Surveys = () => {
               setSelectedCategory(e.target.value);
             }}
             name="category"
-            className="rounded-md border  border-black"
+            className="rounded-md border border-black"
           >
             <option value="">All</option>
             <option value="Tech">Tech</option>

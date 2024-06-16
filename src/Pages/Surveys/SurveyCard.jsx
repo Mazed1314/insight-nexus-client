@@ -8,19 +8,19 @@ const SurveyCard = ({ item }) => {
   // background color based on category
   const getCardColor = (category) => {
     if (category === "Health") {
-      return "bg-blue-200 text-gray-500";
+      return "bg-blue-200 text-gray-700";
     } else if (category === "Education") {
-      return "bg-fuchsia-300 text-gray-500";
+      return "bg-fuchsia-300 text-gray-600";
     } else if (category === "Tech") {
       return "bg-violet-300 text-gray-700";
     } else if (category === "Parenting") {
       return "bg-cyan-200 text-gray-600";
     } else if (category === "Lifestyle") {
-      return "bg-lime-200 text-gray-500";
+      return "bg-lime-200 text-gray-600";
     } else if (category === "Travel") {
-      return "bg-red-200 text-gray-500";
+      return "bg-red-200 text-gray-600";
     } else if (category === "Fashion") {
-      return "bg-yellow-200 text-gray-500";
+      return "bg-yellow-200 text-gray-600";
     } else if (category === "Food") {
       return "bg-green-300 text-black";
     } else if (category === "Finance") {
@@ -28,7 +28,7 @@ const SurveyCard = ({ item }) => {
     } else if (category === "Sports") {
       return "bg-gray-400 text-white";
     } else if (category === "Entertainment") {
-      return "bg-orange-200 text-gray-500";
+      return "bg-orange-200 text-gray-600";
     } else {
       return "bg-gray-100 text-gray-500";
     }
