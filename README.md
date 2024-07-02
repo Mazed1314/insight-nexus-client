@@ -1,31 +1,39 @@
-# React + Vite
+
 
 # InsightNexus
 
-Welcome to InsightNexus, your one-stop solution for creating, managing, and analyzing surveys.
+Welcome to InsightNexus, your one-stop solution for creating, managing, and analyzing surveys. It's a multi-user survey website. If you need to create a survey, you'll need to register for a surveyor account. Once registered, you can create and analyze your surveys. The site has a secure management system for each type of user.
 
-## Admin Access
+**Live Site URL:** [https://insight-nexus.web.app]
 
-- **Admin Email:** mostafa@gmail.com
-- **Admin Password:** Mostafa#123
-- **Live Site URL:** [https://insight-nexus.web.app]
 
 ## Website Features
 
 1. **User Roles:** Four distinct user roles - User, Surveyor, Pro User and Admin.
-2. **User Authentication:** Secure login and registration for all user types.
+2. **Admin Management:** Admins can manage users and surveys.
 3. **Stripe Payment Integration:** Users can upgrade to Pro User status via Stripe payment.
-4. **Survey Participation:** Users can vote on and report surveys.
-5. **Survey Creation and Management:** Surveyors can create and update surveys.
-6. **Commenting:** Pro Users can comment on surveys.
-7. **Admin Management:** Admins can manage users and surveys.
-8. **Real-time Analytics:** Analyze survey responses in real-time.
-9. **Responsive Design:** Fully responsive layout for all device types.
-10. **Secure Dashboards:** All users have access to secure, role-specific dashboards.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Packeges
+-stripe-js
+-tanstack/react-query
+-axios
+-firebase
+-jsonwebtoken
+-recharts
+-react-toastify
+-react-sweetalert2
+-react-spinners
+-react-icons
+-react-router-dom
+-react-helmet
+-react-helmet-async
 
-Currently, two official plugins are available:
+## After clone the project 
+  1.Open the project folder cmd/git bash
+  2.Write "npm install"
+  3.Run the project "npm run dev"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Admin Access
+- **Admin Email:** mostafa@gmail.com
+- **Admin Password:** Mostafa#123
+  
