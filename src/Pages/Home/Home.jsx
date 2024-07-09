@@ -1,3 +1,4 @@
+import { Fade } from "react-awesome-reveal";
 import FAQuestion from "./FAQuestion";
 import FraturedSurvey from "./FraturedSurvey";
 import Hero from "./Hero";
@@ -18,7 +19,9 @@ const Home = () => {
             Featured Surveys
           </span>
         </div>
-        <FraturedSurvey></FraturedSurvey>
+        <Fade duration={5000}>
+          <FraturedSurvey></FraturedSurvey>
+        </Fade>
       </div>
       {/* Latest Surveys Section  */}
       <div className="my-6 ">
@@ -27,7 +30,9 @@ const Home = () => {
             Latest Surveys
           </span>
         </div>
-        <LatestSurvey></LatestSurvey>
+        <Fade duration={5000}>
+          <LatestSurvey></LatestSurvey>
+        </Fade>
       </div>
       {/* How It Works Section  */}
       <div className="my-8"></div>

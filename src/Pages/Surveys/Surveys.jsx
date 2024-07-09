@@ -2,6 +2,7 @@ import SurveyCard from "./SurveyCard";
 import LoadingSpinner from "../../Component/Shared/LoadingSpinner";
 import useSurvey from "../../Hooks/useSurvey";
 import { useEffect, useState } from "react";
+import { Fade } from "react-awesome-reveal";
 
 const Surveys = () => {
   const [survey, loading] = useSurvey();
@@ -63,7 +64,9 @@ const Surveys = () => {
       <div className="w-10/12 mx-auto justify-center flex flex-wrap gap-5">
         {filteredSurveys?.map((item, index) => (
           <>
-            <SurveyCard key={index} item={item}></SurveyCard>
+            <Fade direction="down">
+              <SurveyCard key={index} item={item}></SurveyCard>
+            </Fade>
           </>
         ))}
       </div>
