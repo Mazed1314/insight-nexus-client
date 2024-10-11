@@ -4,6 +4,7 @@ import FraturedSurvey from "./FraturedSurvey";
 import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import LatestSurvey from "./LatestSurvey";
+import Signup from "./Signup";
 
 const Home = () => {
   return (
@@ -40,6 +41,10 @@ const Home = () => {
       {/*  FAQ Section  */}
       <div className="my-8">
         <FAQuestion></FAQuestion>
+      </div>
+
+      <div>
+        <Signup></Signup>
       </div>
     </div>
   );
