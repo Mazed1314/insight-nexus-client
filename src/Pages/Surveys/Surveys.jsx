@@ -23,7 +23,7 @@ const Surveys = () => {
 
   if (loading) return <LoadingSpinner />;
   return (
-    <div className="">
+    <div>
       <div className="my-6 flex justify-end w-11/12 mx-auto items-end gap-4">
         {/* <select className="select select-bordered select-xs ">
           <option disabled selected>

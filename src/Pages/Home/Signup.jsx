@@ -16,7 +16,7 @@ const Signup = () => {
       ref={sectionRef}
       className="bg-gradient-to-b from-white to-blue-100 md:py-32 py-5"
     >
-      <div className="container mx-auto text-center p-5 md:p-0 lg:pb-5">
+      <div className="container mx-auto text-center p-5 ">
         <div className="relative">
           <h1 className="md:text-5xl font-bold text-3xl my-5">Sign up free</h1>
           <p className="my-4 md:w-[40%] mx-auto">
@@ -25,9 +25,9 @@ const Signup = () => {
           </p>
           <motion.img
             src={"/images/survey-3d.png"}
-            width={320}
+            width={220}
             height={100}
-            className="absolute -left-[50px] -top-[137px] hidden md:inline"
+            className="absolute -left-[20px] -top-[90px] hidden md:inline"
             style={{
               translateY,
             }}
@@ -35,16 +35,18 @@ const Signup = () => {
 
           <motion.img
             src={"/flexibility.png"}
-            width={260}
+            width={220}
             height={100}
-            className="absolute -right-[50px] -top-[-30px] hidden md:inline"
+            className="absolute -right-[20px] -top-[-30px] hidden md:inline"
             style={{
               translateY,
             }}
           ></motion.img>
         </div>
         <div className="flex items-center justify-center gap-5 ">
-          <button className="btn bg-yellow-500 text-white">Get for free</button>
+          <button className="btn bg-yellow-500 text-white">
+            <a href="/register">Get for free</a>
+          </button>
           <button className=" flex items-center gap-1">
             Learn more
             <span>

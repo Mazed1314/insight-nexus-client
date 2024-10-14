@@ -4,7 +4,7 @@ import Payment from "../Payment/Payment";
 
 const Pricing = () => {
   return (
-    <div className="my-6 flex gap-4 flex-col md:flex-row flex-wrap md:justify-center items-center">
+    <div className="container mx-auto pt-10 md:pt-0 min-h-screen flex flex-col md:flex-row justify-center items-center gap-8">
       <Helmet>
         <title>InsightNexus | Pricing</title>
       </Helmet>
@@ -37,6 +37,7 @@ const Pricing = () => {
           <li>Protect your account more securely</li>
         </ul>
       </div> */}
+
       {/* card two */}
 
       <div className="max-w-sm w-72 h-96 overflow-clip p-4 border border-gray-300 rounded-lg shadow-lg text-center">

@@ -7,7 +7,7 @@ const Root = () => {
     <div>
       <Navbar></Navbar>
 
-      <div>
+      <div className="my-16 min-h-screen">
         <Outlet></Outlet>
       </div>
 

@@ -57,7 +57,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="shadow-sm px-4 md:px-8 lg:px-16 navbar z-10 bg-white bg-opacity-90 fixed top-0">
+    <div className="px-4 md:px-8 lg:px-16 navbar z-10 bg-emerald-50 bg-opacity-90 fixed top-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -91,11 +91,12 @@ const Navbar = () => {
           />
         </a>
       </div>
-      <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1 gap-4">{link}</ul>
-      </div>
 
       <div className="navbar-end">
+        <div className="hidden md:flex pr-8">
+          <ul className="menu menu-horizontal px-1 gap-5">{link}</ul>
+        </div>
+
         {user ? (
           <>
             <div className="dropdown dropdown-end z-10">

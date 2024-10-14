@@ -1,4 +1,4 @@
-import { Fade } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 import FAQuestion from "./FAQuestion";
 import FraturedSurvey from "./FraturedSurvey";
 import Hero from "./Hero";
@@ -10,42 +10,41 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section  */}
-      <div>
+      <section>
         <Hero></Hero>
-      </div>
-      {/* Featured Surveys Section   */}
-      <div className=" my-8">
-        <div className="flex justify-center">
-          <span className="text-3xl border-y-2 py-2 border-black font-semibold mb-8">
-            Featured Surveys
-          </span>
-        </div>
-        <Fade duration={5000}>
-          <FraturedSurvey></FraturedSurvey>
-        </Fade>
-      </div>
-      {/* Latest Surveys Section  */}
-      <div className="my-6 ">
-        <div className="flex justify-center">
-          <span className="text-3xl border-y-2 py-2 border-black font-semibold mb-8">
-            Latest Surveys
-          </span>
-        </div>
-        <Fade duration={5000}>
-          <LatestSurvey></LatestSurvey>
-        </Fade>
-      </div>
-      {/* How It Works Section  */}
-      <div className="my-8"></div>
-      <HowItWorks></HowItWorks>
-      {/*  FAQ Section  */}
-      <div className="my-8">
-        <FAQuestion></FAQuestion>
-      </div>
+      </section>
 
-      <div>
+      {/* Featured Surveys Section   */}
+      <section className="container mx-auto my-8">
+        <h2 className="text-3xl font-bold p-2 mb-10">Featured Surveys</h2>
+        {/* <Slide direction="up"> */}
+        <FraturedSurvey></FraturedSurvey>
+        {/* </Slide> */}
+      </section>
+
+      {/* Latest Surveys Section  */}
+      <section className="container mx-auto my-8">
+        <h2 className="text-3xl font-bold p-2 mb-10 text-end">
+          Latest Surveys
+        </h2>
+        <Slide direction="up">
+          <LatestSurvey></LatestSurvey>
+        </Slide>
+      </section>
+
+      {/* How It Works Section  */}
+      <section className="container mx-auto my-8">
+        <HowItWorks></HowItWorks>
+      </section>
+
+      {/*  FAQ Section  */}
+      <section className="container mx-auto my-8">
+        <FAQuestion></FAQuestion>
+      </section>
+
+      <section className="-mb-20">
         <Signup></Signup>
-      </div>
+      </section>
     </div>
   );
 };
