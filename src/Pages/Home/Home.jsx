@@ -5,13 +5,18 @@ import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import LatestSurvey from "./LatestSurvey";
 import Signup from "./Signup";
+import Companies from "./Companies";
 
 const Home = () => {
   return (
     <div>
       {/* Hero Section  */}
-      <section>
+      <section className="my-6">
         <Hero></Hero>
+      </section>
+
+      <section>
+        <Companies></Companies>
       </section>
 
       {/* Featured Surveys Section   */}
