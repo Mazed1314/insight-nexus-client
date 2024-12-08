@@ -1,6 +1,6 @@
 import { FaEnvelope, FaHome, FaSearch } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import UseRole from "../Hooks/useRole";
+import UseRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const role = UseRole();

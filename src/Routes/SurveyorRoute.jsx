@@ -1,7 +1,7 @@
-import LoadingSpinner from "../Component/Shared/LoadingSpinner";
-import UseRole from "../Hooks/useRole";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import UseRole from "../hooks/useRole";
 import PropTypes from "prop-types";
-import ErrorSurveyor from "../Pages/Dashboard/Surveyor/ErrorSurveyor";
+import ErrorSurveyor from "../components/dashboard/surveyor/ErrorSurveyor";
 
 const SurveyorRoute = ({ children }) => {
   const [role, isLoading] = UseRole();
@@ -10,7 +10,7 @@ const SurveyorRoute = ({ children }) => {
   if (role === "surveyor") return children;
   return (
     <>
-      <ErrorSurveyor></ErrorSurveyor>{" "}
+      <ErrorSurveyor />{" "}
     </>
   );
 };

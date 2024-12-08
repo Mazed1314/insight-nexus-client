@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../Hooks/useAuth";
-import LoadingSpinner from "../Component/Shared/LoadingSpinner";
+import useAuth from "../hooks/useAuth";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 // eslint-disable-next-line react/prop-types
 const PrivateRoute = ({ children }) => {

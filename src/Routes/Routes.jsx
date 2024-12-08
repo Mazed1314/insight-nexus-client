@@ -1,61 +1,61 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "../Layout/Root";
-import Home from "../Pages/Home/Home";
-import Login from "../Pages/Login/Login";
-import Register from "../Pages/Register/Register";
-import ErrorPage from "../Pages/ErorrPage/ErrorPage";
-import PrivateRoute from "./PrivateRoute";
-import Surveys from "../Pages/Surveys/Surveys";
-import DashboardLayout from "../Layout/DashboardLayout";
-import Pricing from "../Pages/Pricing/Pricing";
-import SurveyDetails from "../Pages/Surveys/SurveyDetails";
-import AdminRoute from "./AdminRoute";
-import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+
+import MainLayout from "../layout/MainLayout";
+import ErrorPage from "../pages/ErrorPage";
+import Home from "../pages/Home";
+import Surveys from "../pages/Surveys";
+import Pricing from "../pages/Pricing";
+import Contact from "../pages/Contact";
+import CreateSurvey from "../components/dashboard/surveyor/CreateSurvey";
 import SurveyorRoute from "./SurveyorRoute";
-import MyReport from "../Pages/Dashboard/User/MyReport";
-import ManageSurvey from "../Pages/Dashboard/Admin/ManageSurvey";
-import ManageSurveyDetails from "../Pages/Dashboard/Admin/ManageSurveyDetails";
-import Profile from "../Pages/Dashboard/Profile";
-import EditProfile from "../Pages/Dashboard/EditProfile";
-import CreateSurvey from "../Pages/Dashboard/Surveyor/CreateSurvey";
-import EditSurvey from "../Pages/Dashboard/Surveyor/EditSurvey";
-import ManageSurveyorSurvey from "../Pages/Dashboard/Surveyor/ManageSurveyorSurvey";
-import ViewDetails from "../Pages/Dashboard/Surveyor/ViewDetails";
-import ManageComent from "../Pages/Dashboard/Pro/ManageComent";
-import ParticipateSurvey from "../Pages/Dashboard/User/ParticipateSurvey";
-import Contact from "../Pages/Contact";
-import Payments from "../Pages/Dashboard/Admin/Payments";
-// import Payment from "../Pages/Payment/Payment";
+import PrivateRoute from "./PrivateRoute";
+import EditSurvey from "../components/dashboard/surveyor/EditSurvey";
+import SurveyDetails from "../components/surveys/SurveyDetails";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import DashboardLayout from "../layout/DashboardLayout";
+import Profile from "../components/dashboard/Profile";
+import EditProfile from "../components/dashboard/EditProfile";
+import ParticipateSurvey from "../components/dashboard/user/ParticipateSurvey";
+import MyReport from "../components/dashboard/user/MyReport";
+import ManageComent from "../components/dashboard/pro_user/ManageComent";
+import ManageSurveyorSurvey from "../components/dashboard/surveyor/ManageSurveyorSurvey";
+import ViewDetails from "../components/dashboard/surveyor/ViewDetails";
+import ManageSurvey from "../components/dashboard/admin/ManageSurvey";
+import AdminRoute from "./AdminRoute";
+import ManageSurveyDetails from "../components/dashboard/admin/ManageSurveyDetails";
+import ManageUsers from "../components/dashboard/admin/ManageUsers";
+import Payments from "../components/dashboard/admin/Payments";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-    errorElement: <ErrorPage></ErrorPage>,
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
 
       {
         path: "/surveys",
-        element: <Surveys></Surveys>,
+        element: <Surveys />,
       },
       {
         path: "/pricing",
-        element: <Pricing></Pricing>,
+        element: <Pricing />,
       },
       {
         path: "/contact",
-        element: <Contact></Contact>,
+        element: <Contact />,
       },
       {
         path: "/create-survey",
         element: (
           <PrivateRoute>
             <SurveyorRoute>
-              <CreateSurvey></CreateSurvey>
+              <CreateSurvey />
             </SurveyorRoute>
           </PrivateRoute>
         ),
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SurveyorRoute>
-              <EditSurvey></EditSurvey>
+              <EditSurvey />
             </SurveyorRoute>
           </PrivateRoute>
         ),
@@ -74,12 +74,12 @@ const router = createBrowserRouter([
         path: "/view-details/:_id",
         element: (
           <PrivateRoute>
-            <SurveyDetails></SurveyDetails>
+            <SurveyDetails />
           </PrivateRoute>
         ),
       },
-      { path: "/login", element: <Login></Login> },
-      { path: "/register", element: <Register></Register> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
     ],
   },
 
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <DashboardLayout></DashboardLayout>
+        <DashboardLayout />
       </PrivateRoute>
     ),
     children: [
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         path: "profile",
         element: (
           <PrivateRoute>
-            <Profile></Profile>
+            <Profile />
           </PrivateRoute>
         ),
       },
@@ -103,7 +103,7 @@ const router = createBrowserRouter([
         path: "profile/edit-user/:id",
         element: (
           <PrivateRoute>
-            <EditProfile></EditProfile>
+            <EditProfile />
           </PrivateRoute>
         ),
       },
@@ -114,7 +114,7 @@ const router = createBrowserRouter([
         path: "user/surveys",
         element: (
           <PrivateRoute>
-            <ParticipateSurvey></ParticipateSurvey>
+            <ParticipateSurvey />
           </PrivateRoute>
         ),
       },
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
         path: "user/my-reports",
         element: (
           <PrivateRoute>
-            <MyReport></MyReport>
+            <MyReport />
           </PrivateRoute>
         ),
       },
@@ -131,7 +131,7 @@ const router = createBrowserRouter([
         path: "user/comments",
         element: (
           <PrivateRoute>
-            <ManageComent></ManageComent>
+            <ManageComent />
           </PrivateRoute>
         ),
       },
@@ -143,7 +143,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SurveyorRoute>
-              <CreateSurvey></CreateSurvey>
+              <CreateSurvey />
             </SurveyorRoute>
           </PrivateRoute>
         ),
@@ -153,7 +153,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SurveyorRoute>
-              <ManageSurveyorSurvey></ManageSurveyorSurvey>
+              <ManageSurveyorSurvey />
             </SurveyorRoute>
           </PrivateRoute>
         ),
@@ -164,7 +164,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SurveyorRoute>
-              <ViewDetails></ViewDetails>
+              <ViewDetails />
             </SurveyorRoute>
           </PrivateRoute>
         ),
@@ -178,7 +178,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ManageSurvey></ManageSurvey>
+              <ManageSurvey />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -188,7 +188,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ManageSurveyDetails></ManageSurveyDetails>
+              <ManageSurveyDetails />
             </AdminRoute>
           </PrivateRoute>
         ),
@@ -198,7 +198,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <ManageUsers></ManageUsers>
+              <ManageUsers />
               {/* Filter users by role. */}
             </AdminRoute>
           </PrivateRoute>
@@ -209,7 +209,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoute>
-              <Payments></Payments>
+              <Payments />
             </AdminRoute>
           </PrivateRoute>
         ),

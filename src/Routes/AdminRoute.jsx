@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import LoadingSpinner from "../Component/Shared/LoadingSpinner";
-import UseRole from "../Hooks/useRole";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import UseRole from "../hooks/useRole";
 
 const AdminRoute = ({ children }) => {
   const [role, isLoading] = UseRole();
